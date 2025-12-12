@@ -7,6 +7,7 @@
   --color-span: #f5f7fa;
   --color-layout: #ffffff;
   --color-container: #737785;
+  --color-light: #ebebeb;
 }
 
 :root {
@@ -53,6 +54,11 @@ h5 {
 
 h6 {
   font-size: 1.25rem;
+}
+
+/* Classes para tamanho dos textos */
+.text-12 {
+  font-size: 0.75rem;
 }
 
 .figtree {
