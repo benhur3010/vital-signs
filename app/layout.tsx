@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Inter } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
+import MenuHeader from "./components/layout/MenuHeader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,42 +28,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${figtree.variable}`}>
       <body>
-        <header className="bg-span">
-          <div className="bg-layout rounded-b-[60px]">
-            <div className="container flex items-center justify-between py-7">
-              <Image
-                width={176}
-                height={51}
-                src={"/logo.svg"}
-                alt="logo com a imagem de um coração e escrito Vital Signs"
-              />
-              <nav className="flex gap-4 text-12 font-medium">
-                <a href="#quem-somos">QUEM SOMOS</a>
-                <a href="#como-funciona">COMO FUNCIONA</a>
-                <a href="#passo-a-passo">PASSO A PASSO</a>
-                <a href="#pra-quem-e">PRA QUEM É</a>
-                <a href="#planos-e-modelos-de-acesso">
-                  PLANOS E MODELOS DE ACESSO
-                </a>
-              </nav>
-              <div className="flex gap-5">
-                <Image
-                  width={140}
-                  height={30}
-                  src={"/logo-google-play.svg"}
-                  alt="logo com a imagem de um coração e escrito Vital Signs"
-                />
-                <Image
-                  width={140}
-                  height={30}
-                  src={"/logo-apple.svg"}
-                  alt="logo com a imagem de um coração e escrito Vital Signs"
-                />
-              </div>
-            </div>
-          </div>
-        </header>
-        {/* Conteúdo do body */}
+        <MenuHeader />
         {children}
       </body>
     </html>
