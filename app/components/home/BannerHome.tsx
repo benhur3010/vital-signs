@@ -47,9 +47,9 @@ export default function BannerHome() {
         </div>
       </div>
 
-      <div className="container text-center py-12 px-5">
+      <div className="max-w-240 mx-auto text-center py-12 px-5">
         {" "}
-        <h5 className="max-w-240 font-light mx-auto text-primary">
+        <h5 className="font-light mx-auto text-primary">
           {" "}
           Plataforma de saúde digital que{" "}
           <span className="font-bold">

@@ -83,6 +83,11 @@ h6 {
   font-size: 0.75rem;
 }
 
+.text-20 {
+  font-size: 1.25rem;
+}
+/* Fim das classes para tamanho dos textos */
+
 .figtree {
   font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
