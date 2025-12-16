@@ -78,9 +78,7 @@ export default function HowItWorks() {
       mainImage: {
         src: "/how-it-works/coleta-inteligente-dados.png",
         alt: "Coleta inteligente de dados",
-        wrapperClassName: "w-90 h-83",
-        className: "object-contain object-left",
-        sizes: "(min-width: 1024px) 360px, 70vw",
+        className: "object-center sm:object-left",
         align: "start",
       },
       overlayImage: {
@@ -88,14 +86,16 @@ export default function HowItWorks() {
         alt: "Detalhe coleta",
         width: 245,
         height: 120,
-        className: "absolute bottom-0 left-32",
+        className:
+          "absolute top-58 left-18 xl:bottom-0 sm:bottom-[-20px] sm:top-auto sm:left-32",
       },
       detailImage: {
         src: "/how-it-works/coleta-inteligente-dados-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute bottom-25 left-68",
+        className:
+          "absolute xl:bottom-25 sm:bottom-20 sm:top-auto top-50 left-48 sm:left-68",
       },
     },
     {
@@ -108,9 +108,7 @@ export default function HowItWorks() {
       mainImage: {
         src: "/how-it-works/transmissao-segura.png",
         alt: "Transmissão segura",
-        wrapperClassName: "w-90 h-83",
         className: "object-contain object-left",
-        sizes: "(min-width: 1024px) 360px, 70vw",
         align: "start",
       },
       overlayImage: {
@@ -118,14 +116,16 @@ export default function HowItWorks() {
         alt: "Detalhe transmissão",
         width: 142,
         height: 104,
-        className: "absolute bottom-0 left-7",
+        className:
+          "absolute xl:bottom-0 sm:bottom-[-20px] sm:top-auto top-58 left-18",
       },
       detailImage: {
         src: "/how-it-works/transmissao-segura-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute bottom-23 left-35",
+        className:
+          "absolute xl:bottom-23 sm:bottom-18 sm:top-auto top-50 left-48",
       },
     },
     {
@@ -138,9 +138,7 @@ export default function HowItWorks() {
       mainImage: {
         src: "/how-it-works/analise-ia.png",
         alt: "Alertas e suporte ao diagnóstico",
-        wrapperClassName: "w-90 h-83",
         className: "object-contain object-left",
-        sizes: "(min-width: 1024px) 360px, 70vw",
         align: "end",
       },
       overlayImage: {
@@ -148,14 +146,15 @@ export default function HowItWorks() {
         alt: "Detalhe alertas",
         width: 152,
         height: 119,
-        className: "absolute top-0 left-[-15px]",
+        className:
+          "absolute top-58 left-10 sm:top-[-40px] xl:top-0 xl:left-[-15px]",
       },
       detailImage: {
         src: "/how-it-works/analise-ia-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute top-8 left-28",
+        className: "absolute top-50 left-40 xl:top-8 xl:left-28 sm:top-13",
       },
     },
     {
@@ -168,9 +167,7 @@ export default function HowItWorks() {
       mainImage: {
         src: "/how-it-works/alerta-e-suporte.png",
         alt: "Alertas e suporte ao diagnóstico",
-        wrapperClassName: "w-90 h-83",
         className: "object-contain object-left",
-        sizes: "(min-width: 1024px) 360px, 70vw",
         align: "end",
       },
       overlayImage: {
@@ -178,17 +175,16 @@ export default function HowItWorks() {
         alt: "Análise e suporte gráficos",
         width: 184,
         height: 119,
-        className: "absolute top-0 left-47",
+        className: "absolute top-58 left-18 xl:top-0 sm:top-[-40px] sm:left-47",
       },
       detailImage: {
         src: "/how-it-works/alerta-e-suporte-relative-detail.png",
         alt: "Símbolo de alerta",
         width: 53,
         height: 53,
-        className: "absolute top-25 left-83",
+        className: "absolute top-50 left-48 xl:top-25 sm:left-83 sm:top-15",
       },
     },
-
     {
       id: "monitoramento",
       number: "05.",
@@ -199,9 +195,7 @@ export default function HowItWorks() {
       mainImage: {
         src: "/how-it-works/monitoramento.png",
         alt: "Monitoramento contínuo",
-        wrapperClassName: "w-90 h-83",
         className: "object-contain object-left",
-        sizes: "(min-width: 1024px) 360px, 70vw",
         align: "start",
       },
       overlayImage: {
@@ -209,14 +203,16 @@ export default function HowItWorks() {
         alt: "Detalhe monitoramento",
         width: 245,
         height: 120,
-        className: "absolute bottom-0 left-32",
+        className:
+          "absolute top-58 left-18 xl:bottom-0 sm:top-auto sm:left-32 sm:bottom-[-20px]",
       },
       detailImage: {
         src: "/how-it-works/monitoramento-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute bottom-29 left-78",
+        className:
+          "absolute top-47 left-60 xl:bottom-29 sm:top-auto sm:bottom-23 sm:left-78",
       },
     },
   ];
@@ -232,7 +228,7 @@ export default function HowItWorks() {
       : "self-center";
 
   return (
-    <div className="pt-12 max-w-290 px-5 mx-auto pb-10">
+    <div className="pt-12 max-w-290 px-5 mx-auto sm:pb-10">
       <h4 className="text-secondary text-center">
         Confira como a Vital Signs
         <br />
@@ -241,8 +237,8 @@ export default function HowItWorks() {
         </span>
       </h4>
 
-      <div className="flex gap-12 mt-14">
-        <div className="w-[35%] text-secondary figtree font-medium space-y-8">
+      <div className="flex-row space-y-20 mt-14 xl:flex xl:space-y-0 xl:gap-12">
+        <div className="xl:w-[35%] md:w-1/2 mx-auto text-secondary figtree font-medium space-y-8">
           {steps.map((item) => {
             const isActive = item.id === activeId;
 
@@ -280,13 +276,12 @@ export default function HowItWorks() {
 
         <FadeIn
           key={active.id}
-          className="w-[65%] flex items-start gap-12 relative"
+          className="xl:w-[65%] md:w-[80%] mx-auto space-y-10 text-center sm:text-left sm:space-y-0 sm:flex items-start gap-12 relative"
         >
           <div
             className={[
-              "relative shrink-0",
+              "relative shrink-0 w-full max-w-85 h-83 mx-auto sm:mx-0 sm:w-90 sm:max-w-none",
               alignClass,
-              active.mainImage.wrapperClassName ?? "w-90 h-83",
             ].join(" ")}
             style={
               active.mainImage.width && active.mainImage.height
@@ -301,9 +296,6 @@ export default function HowItWorks() {
               src={active.mainImage.src}
               alt={active.mainImage.alt}
               fill
-              sizes={
-                active.mainImage.sizes ?? "(min-width: 1024px) 363px, 80vw"
-              }
               className={[
                 "object-contain",
                 active.mainImage.className ?? "",
@@ -313,8 +305,9 @@ export default function HowItWorks() {
 
           <div className="text-primary space-y-3">
             <h6 className="font-bold">{active.panelTitle}</h6>
-            <p className="text-20 font-light">{active.panelDescription}</p>
-
+            <p className="sm:text-20 text-14 font-light">
+              {active.panelDescription}
+            </p>
             <p className="text-black mt-5 hover:cursor-pointer hover:text-primary hover:underline">
               Baixe o App
             </p>

@@ -58,9 +58,38 @@ h6 {
   font-size: 1.25rem;
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 4rem;
+    line-height: 4.5rem;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+    line-height: 4rem;
+  }
+
+  h3 {
+    font-size: 4.2rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1.25rem;
+  }
+}
+
 @media (max-width: 640px) {
   h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
+    line-height: 3.5rem;
   }
   h2 {
     font-size: 2.8rem;
@@ -75,7 +104,7 @@ h6 {
     font-size: 1.25rem;
   }
   h6 {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -86,6 +115,10 @@ h6 {
 
 .text-20 {
   font-size: 1.25rem;
+}
+
+.text-14 {
+  font-size: 0.875rem;
 }
 /* Fim das classes para tamanho dos textos */
 
