@@ -15,7 +15,7 @@ export default function Home() {
           e conectada.
         </h1>
         <Image
-          className="mx-auto mt-12"
+          className="mx-auto mt-12 hover:cursor-pointer"
           src="/play-video.svg"
           alt="Video"
           width={92}
