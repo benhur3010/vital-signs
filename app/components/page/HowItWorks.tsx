@@ -195,27 +195,28 @@ export default function HowItWorks() {
       menuTitle: "Monitoramento contínuo",
       panelTitle: "Monitoramento contínuo",
       panelDescription:
-        "Com acompanhamento constante, é possível agir mais cedo e manter uma linha de cuidado mais próxima e eficaz.",
+        "A plataforma atualiza o histórico de saúde em tempo real, permitindo uma visão longitudinal da vida e não apenas de um momento.",
       mainImage: {
-        src: "/how-it-works/coleta-inteligente-dados.png",
+        src: "/how-it-works/monitoramento.png",
         alt: "Monitoramento contínuo",
         wrapperClassName: "w-90 h-83",
         className: "object-contain object-left",
         sizes: "(min-width: 1024px) 360px, 70vw",
+        align: "start",
       },
       overlayImage: {
-        src: "/how-it-works/coleta-inteligente-dados-relative.png",
+        src: "/how-it-works/monitoramento-relative.png",
         alt: "Detalhe monitoramento",
         width: 245,
         height: 120,
         className: "absolute bottom-0 left-32",
       },
       detailImage: {
-        src: "/how-it-works/coleta-inteligente-dados-relative-detail.png",
+        src: "/how-it-works/monitoramento-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute bottom-25 left-68",
+        className: "absolute bottom-29 left-78",
       },
     },
   ];
@@ -255,14 +256,8 @@ export default function HowItWorks() {
               >
                 <div>{item.number}</div>
 
-                <div className="flex items-center justify-between gap-4">
-                  <h6
-                    className={
-                      isActive
-                        ? "text-primary font-bold"
-                        : "text-secondary font-bold"
-                    }
-                  >
+                <div className="flex items-center justify-between gap-4 font-bold">
+                  <h6 className={isActive ? "text-primary" : "text-secondary"}>
                     {item.menuTitle}
                   </h6>
 
