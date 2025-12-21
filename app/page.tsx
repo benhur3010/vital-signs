@@ -10,7 +10,7 @@ export default function Home() {
       <HowItWorks />
 
       {/* Componente de vídeo */}
-      <div className="bg-container md:py-35 py-20 mt-15 px-5">
+      <section className="bg-container md:py-35 py-20 mt-15 px-5">
         <h1 className="max-w-200 text-center mx-auto">
           <span className="font-bold">Cuide da sua saúde</span> de forma simples
           e conectada.
@@ -22,7 +22,7 @@ export default function Home() {
           width={92}
           height={92}
         />
-      </div>
+      </section>
 
       <Faq />
     </>

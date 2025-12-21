@@ -228,7 +228,7 @@ export default function HowItWorks() {
       : "self-center";
 
   return (
-    <div className="pt-12 max-w-290 px-5 mx-auto sm:pb-10">
+    <section className="pt-12 max-w-290 px-5 mx-auto sm:pb-10">
       <h4 className="text-secondary text-center">
         Confira como a Vital Signs
         <br />
@@ -330,6 +330,6 @@ export default function HowItWorks() {
           />
         </FadeIn>
       </div>
-    </div>
+    </section>
   );
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function BannerHome() {
   return (
-    <div className="bg-span pt-5">
+    <section className="bg-span pt-5">
       <div className="relative w-full">
         <div className="relative w-full aspect-1920/820 2xl:aspect-1920/820">
           <Image
@@ -87,6 +87,6 @@ export default function BannerHome() {
           </h2>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
