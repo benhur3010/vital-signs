@@ -8,6 +8,14 @@
   --color-layout: #ffffff;
   --color-container: #737785;
   --color-light: #ebebeb;
+
+  /* Classes para tamanho dos textos */
+  --text-8: 0.5rem;
+  --text-11: 0.6875rem;
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-20: 1.25rem;
 }
 
 :root {
@@ -17,8 +25,8 @@
   color: var(--color-span);
 }
 
-a {
-  color: var(--color-secondary);
+html {
+  scroll-behavior: smooth;
 }
 
 /* Fontes */
@@ -107,20 +115,6 @@ h6 {
     font-size: 1.25rem;
   }
 }
-
-/* Classes para tamanho dos textos */
-.text-12 {
-  font-size: 0.75rem;
-}
-
-.text-20 {
-  font-size: 1.25rem;
-}
-
-.text-14 {
-  font-size: 0.875rem;
-}
-/* Fim das classes para tamanho dos textos */
 
 .figtree {
   font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont,

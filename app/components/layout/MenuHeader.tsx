@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import MenuHamburguer from "./MenuHamburguer";
+import Link from "next/link";
 
 type NavItem = { href: string; label: string };
 
@@ -90,21 +91,23 @@ export default function MenuHeader() {
       >
         <div className={["px-5 rounded-b-[60px]", innerBgClass].join(" ")}>
           <div className="container flex items-center justify-between py-7">
-            <Image
-              width={176}
-              height={51}
-              src="/logo.svg"
-              alt="logo com a imagem de um coração e escrito Vital Signs"
-              priority
-              className="hover:cursor-pointer"
-            />
+            <Link href="/" aria-label="Ir para o início">
+              <Image
+                width={176}
+                height={51}
+                src="/logo.svg"
+                alt="logo com a imagem de um coração e escrito Vital Signs"
+                priority
+                className="hover:cursor-pointer"
+              />
+            </Link>
 
             <nav className="hidden lg:flex gap-4 text-12 font-medium">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="transition-opacity hover:opacity-80"
+                  className="transition-opacity hover:opacity-80 text-secondary"
                 >
                   {item.label}
                 </a>

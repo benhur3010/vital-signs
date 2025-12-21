@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Figtree, Inter } from "next/font/google";
 import "./globals.css";
 import MenuHeader from "./components/layout/MenuHeader";
+import Footer from "./components/layout/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body>
         <MenuHeader />
         {children}
+        <Footer />
       </body>
     </html>
   );
