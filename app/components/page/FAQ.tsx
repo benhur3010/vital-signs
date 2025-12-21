@@ -107,7 +107,7 @@ export default function Faq() {
 
   return (
     <section className="bg-secondary text-white">
-      <div className="container px-5 py-20">
+      <div className="container px-5 md:py-20 py-10">
         <div className="max-w-250 ml-auto">
           <button
             type="button"
@@ -155,7 +155,7 @@ export default function Faq() {
                         aria-controls={`${itemPanelId}-panel`}
                         className="w-full"
                       >
-                        <div className="flex gap-42 items-start text-left">
+                        <div className="flex md:gap-42 gap-5 items-start text-left">
                           <span>
                             <FaqToggleIcon
                               open={isOpen}
@@ -164,7 +164,7 @@ export default function Faq() {
                           </span>
 
                           <div>
-                            <div className="flex gap-9">
+                            <div className="flex md:gap-9 gap-2">
                               <h6 className="text-accent">{number}.</h6>
                               <h6>{item.question}</h6>
                             </div>
@@ -180,7 +180,7 @@ export default function Faq() {
                             >
                               <div className="min-h-0">
                                 <div className="grid grid-cols-[44px,72px,1fr] gap-3">
-                                  <p className=" text-18 font-extralight max-w-140 mt-12 mb-8">
+                                  <p className=" sm:text-18 text-14 font-extralight max-w-140 md:mt-12 mt-5 md:mb-8">
                                     {item.answer}
                                   </p>
                                 </div>
