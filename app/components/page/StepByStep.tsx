@@ -34,7 +34,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 157,
-          className: "absolute top-0 right-0",
+          className: "absolute md:top-0 md:bottom-auto bottom-0 md:right-0",
         },
 
         bottomBadge: {
@@ -42,7 +42,8 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute bottom-0 right-40",
+          className:
+            "absolute md:bottom-0 md:top-auto top-25 xl:right-40 md:right-30",
         },
       },
       {
@@ -56,7 +57,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 137,
-          className: "absolute bottom-0 left-70",
+          className: "absolute bottom-0 xl:left-70 md:left-90",
         },
 
         bottomBadge: {
@@ -64,7 +65,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute top-0 left-70",
+          className: "absolute md:top-0 top-25 xl:left-70 md:left-90",
         },
       },
       {
@@ -78,7 +79,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 200,
           height: 139,
-          className: "absolute top-0 right-54",
+          className: "absolute md:top-0 top-25 xl:right-54 md:right-28",
         },
 
         bottomBadge: {
@@ -86,7 +87,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute bottom-0 left-60",
+          className: "absolute bottom-0 xl:left-60 md:left-90",
         },
       },
       {
@@ -100,7 +101,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 163,
-          className: "absolute bottom-0 right-10",
+          className: "absolute bottom-0 xl:right-10 md:right-0",
         },
 
         bottomBadge: {
@@ -108,7 +109,8 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 131,
           height: 133,
-          className: "absolute top-25 right-35",
+          className:
+            "absolute xl:top-25 md:top-45 top-30 xl:right-35 md:right-10",
         },
       },
       {
@@ -122,7 +124,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 156,
           height: 133,
-          className: "absolute bottom-30 right-33",
+          className: "absolute md:bottom-30 bottom-0 xl:right-33 md:right-10",
         },
 
         bottomBadge: {
@@ -130,7 +132,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute top-0 left-60",
+          className: "absolute xl:top-0 md:top-5 top-35 xl:left-60 md:left-80",
         },
       },
     ],
@@ -217,17 +219,17 @@ export default function StepByStep() {
         {/* Contéudo das Tabs */}
         <div
           className={[
-            "mt-15 pt-10 pb-7 transition-opacity duration-300 ease-in-out motion-reduce:transition-none max-w-210 mx-auto relative flex items-center gap-25",
+            "mt-15 xl:pt-10 md:pt-25 pb-7 transition-opacity duration-300 ease-in-out motion-reduce:transition-none max-w-210 justify-center xl:justify-start mx-auto relative md:flex items-center gap-25",
             visible ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
           {/* Texto */}
-          <p className="text-primary max-w-50 text-18 font-light pb-4 border-b border-blue-extralight">
+          <p className="text-primary md:max-w-50 md:text-left text-center text-18 font-light pb-4 border-b border-blue-extralight">
             {step.body}
           </p>
 
           {/* Imagens */}
-          <div>
+          <div className="flex justify-center mt-20 md:mt-0">
             <div className="w-83 h-100 rounded-[28px] overflow-hidden">
               <Image
                 width={332}
