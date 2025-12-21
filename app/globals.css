@@ -8,6 +8,8 @@
   --color-layout: #ffffff;
   --color-container: #737785;
   --color-light: #ebebeb;
+  --color-blue-light: #81E3FE;
+  --color-blue-extralight: #CBC4F9;
 
   /* Classes para tamanho dos textos */
   --text-8: 0.5rem;

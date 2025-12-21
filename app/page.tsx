@@ -2,6 +2,7 @@ import Image from "next/image";
 import BannerHome from "./components/page/BannerHome";
 import HowItWorks from "./components/page/HowItWorks";
 import Faq from "./components/page/FAQ";
+import StepByStep from "./components/page/StepByStep";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         />
       </section>
 
+      <StepByStep />
       <Faq />
     </>
   );
