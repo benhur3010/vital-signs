@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BannerHome from "./components/page/BannerHome";
 import HowItWorks from "./components/page/HowItWorks";
+import Faq from "./components/page/FAQ";
 
 export default function Home() {
   return (
@@ -22,6 +23,8 @@ export default function Home() {
           height={92}
         />
       </div>
+
+      <Faq />
     </>
   );
 }

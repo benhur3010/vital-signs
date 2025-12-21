@@ -3,7 +3,7 @@
 @theme {
   --color-primary: #523dea;
   --color-secondary: #2b3a67;
-  --color-accent: #81e3fe;
+  --color-accent: #ffe68f;
   --color-span: #f5f7fa;
   --color-layout: #ffffff;
   --color-container: #737785;
@@ -15,6 +15,7 @@
   --text-12: 0.75rem;
   --text-14: 0.875rem;
   --text-16: 1rem;
+  --text-18: 1.125rem;
   --text-20: 1.25rem;
 }
 
