@@ -8,8 +8,8 @@
   --color-layout: #ffffff;
   --color-container: #737785;
   --color-light: #ebebeb;
-  --color-blue-light: #81E3FE;
-  --color-blue-extralight: #CBC4F9;
+  --color-blue-light: #81e3fe;
+  --color-blue-extralight: #cbc4f9;
 
   /* Classes para tamanho dos textos */
   --text-8: 0.5rem;
@@ -131,4 +131,8 @@ h6 {
 
 .borda {
   border: 1px solid red;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

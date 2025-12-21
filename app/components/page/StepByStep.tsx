@@ -173,7 +173,18 @@ export default function StepByStep() {
         <div
           role="tablist"
           aria-label="Como funciona"
-          className="flex flex-wrap gap-x-6 gap-y-4 border-b border-blue-extralight max-lg:justify-center lg:justify-between"
+          className="
+            flex flex-nowrap overflow-x-auto whitespace-nowrap
+            justify-start
+            gap-3 md:pb-0 pb-3 -mx-5 md:mx-0 px-3
+            border-b border-blue-extralight
+            scroll-px-5 scroll-smooth
+            snap-x snap-mandatory
+            [scrollbar-width:none] [-ms-overflow-style:none]
+            md:flex-wrap md:overflow-visible md:whitespace-normal md:px-0
+            md:justify-center
+            xl:justify-between
+        "
         >
           {steps.map((s, i) => {
             const isActive = i === activeIndex;
@@ -187,12 +198,13 @@ export default function StepByStep() {
                 type="button"
                 onClick={() => handleSelect(i)}
                 className={[
-                  "pb-5 text-left transition-colors font-medium figtree",
-                  "border-b-2 hover:cursor-pointer",
-                  "lg:max-xl:last:w-full lg:max-xl:last:text-center",
+                  "snap-start transition-colors font-medium figtree hover:cursor-pointer",
+                  "border-b-2 md:pb-5",
+                  "px-4 py-2 rounded-full md:rounded-none",
+                  "border-transparent md:border-b-2",
                   isActive
-                    ? "border-primary text-primary"
-                    : "border-transparent text-primary/70 hover:text-primary",
+                    ? "bg-primary text-white md:bg-transparent md:text-primary md:border-primary"
+                    : "bg-primary/5 text-primary/70 md:bg-transparent md:border-transparent hover:text-primary",
                 ].join(" ")}
               >
                 <span className="text-blue-light">{number}.</span>{" "}
