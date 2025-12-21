@@ -168,12 +168,12 @@ export default function StepByStep() {
 
   return (
     <section className="container">
-      <div className="px-5 py-25">
+      <div className="px-5 lg:py-25 md:py-15 py-10">
         {/* Tabs */}
         <div
           role="tablist"
           aria-label="Como funciona"
-          className="flex flex-wrap justify-between gap-6 border-b border-blue-extralight"
+          className="flex flex-wrap gap-x-6 gap-y-4 border-b border-blue-extralight max-lg:justify-center lg:justify-between"
         >
           {steps.map((s, i) => {
             const isActive = i === activeIndex;
@@ -189,13 +189,14 @@ export default function StepByStep() {
                 className={[
                   "pb-5 text-left transition-colors font-medium figtree",
                   "border-b-2 hover:cursor-pointer",
+                  "lg:max-xl:last:w-full lg:max-xl:last:text-center",
                   isActive
                     ? "border-primary text-primary"
                     : "border-transparent text-primary/70 hover:text-primary",
                 ].join(" ")}
               >
                 <span className="text-blue-light">{number}.</span>{" "}
-                <span className="whitespace-nowrap">{s.title}</span>
+                <span className="lg:whitespace-nowrap">{s.title}</span>
               </button>
             );
           })}
