@@ -37,52 +37,52 @@ export default function Faq() {
       {
         question: "O que são wearables?",
         answer:
-          "Wearables são dispositivos vestíveis (como relógios e pulseiras inteligentes) que coletam dados do corpo em tempo real.",
+          "São dispositivos vestíveis (como smartwatches e pulseiras) capazes de medir frequência cardíaca, pressão, oxigenação e muito mais.",
       },
       {
         question: "Para quem o app é indicado?",
         answer:
-          "Para pessoas que desejam acompanhar indicadores de saúde continuamente e compartilhar informações com profissionais quando necessário.",
+          "Para quem busca prevenção, possui doenças crônicas, pratica esportes, está em gestação ou deseja viver com mais autonomia e segurança.",
       },
       {
         question: "Por que monitorar continuamente é importante?",
         answer:
-          "Porque padrões e variações sutis podem indicar mudanças relevantes antes de sintomas se tornarem evidentes.",
+          "Porque a saúde não espera. O monitoramento contínuo identifica alterações antes que se tornem emergências.",
       },
       {
         question: "Quais os benefícios?",
         answer:
-          "Você acompanha seus sinais vitais com mais clareza, identifica tendências ao longo do tempo e pode compartilhar informações relevantes com seu médico para decisões mais rápidas e assertivas.",
+          "Prevenção ativa, personalização do cuidado, autoconhecimento e melhor comunicação com profissionais de saúde.",
       },
       {
         question: "Preciso usar o wearable o tempo todo?",
         answer:
-          "Não necessariamente. Quanto mais tempo de uso, melhores as leituras e tendências, mas você pode usar conforme sua rotina. O ideal é manter uma frequência consistente para gerar comparações confiáveis.",
+          "Não, mas quanto mais leituras diárias, maior a precisão do VitalScore™ e a qualidade das recomendações.",
       },
       {
         question: "Quem tem acesso aos meus dados?",
         answer:
-          "Somente você e as pessoas/profissionais que você autorizar dentro do app. Você controla os compartilhamentos e pode ajustar ou revogar permissões a qualquer momento.",
+          "Apenas você e os profissionais que autorizar. Todos os dados são protegidos conforme a LGPD.",
       },
       {
         question: "Quais marcas são compatíveis?",
         answer:
-          "A compatibilidade depende do modelo e das integrações disponíveis no app. Na seção de dispositivos, você encontra a lista atualizada de marcas e modelos suportados e como conectá-los.",
+          "Apple Watch, Samsung, Fitbit, Oura Ring e outros via Health Connect (Android) e HealthKit (iOS).",
       },
       {
         question: "Como escolho meu médico?",
         answer:
-          "Você pode conectar um médico de confiança convidando-o pelo app (quando disponível) ou seguindo as opções de indicação/lista de profissionais integrados. O app guia o passo a passo de vínculo e autorização.",
+          "Pelo app. Você define o profissional ou solicita que a Vital Signs convide seu médico para a plataforma.",
       },
       {
         question: "Quanto custa?",
         answer:
-          "O valor varia conforme o plano e as funcionalidades incluídas (por exemplo, recursos de acompanhamento e integração). Consulte a seção de Planos no site/app para ver preços e detalhes atualizados.",
+          "Modelo de assinatura mensal, com opção gratuita para uso independente.",
       },
       {
         question: "Sou profissional de saúde. Como participar?",
         answer:
-          "Você pode se cadastrar como profissional e solicitar participação na plataforma. A equipe valida as informações e, após aprovação, você poderá receber convites de pacientes e acompanhar dados conforme as permissões concedidas.",
+          "Envie seu contato para vitalsigns@vitalsigns.com.br e integre-se à nossa rede de monitoramento inteligente.",
       },
     ],
     []
