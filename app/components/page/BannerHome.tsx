@@ -62,7 +62,7 @@ export default function BannerHome() {
 
       <div className="bg-primary py-8 px-5">
         <div className="max-w-160 mx-auto text-center">
-          <h2 className="text-span font-light leading-tight">
+          <h2 className="text-span font-light">
             Feito {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/banner-home/homem-raquete.png"

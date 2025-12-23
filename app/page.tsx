@@ -3,6 +3,7 @@ import BannerHome from "./components/page/BannerHome";
 import HowItWorks from "./components/page/HowItWorks";
 import Faq from "./components/page/FAQ";
 import StepByStep from "./components/page/StepByStep";
+import WhoIsItFor from "./components/page/WhoIsItFor";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       </section>
 
       <StepByStep />
+      <WhoIsItFor />
       <Faq />
     </>
   );
