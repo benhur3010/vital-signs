@@ -5,6 +5,7 @@ import Faq from "./components/page/FAQ";
 import StepByStep from "./components/page/StepByStep";
 import WhoIsItFor from "./components/page/WhoIsItFor";
 import Plans from "./components/page/Plans";
+import Testimonials from "./components/page/Testimonials";
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
       <StepByStep />
       <WhoIsItFor />
       <Plans />
+      <Testimonials />
       <Faq />
     </>
   );
