@@ -256,18 +256,44 @@ export default function HowItWorks() {
                   <h6 className={isActive ? "text-primary" : "text-secondary"}>
                     {item.menuTitle}
                   </h6>
-
-                  <Image
-                    src="/how-it-works/arrow-down.png"
-                    alt="seta"
-                    width={36}
-                    height={22}
-                    className={[
-                      "shrink-0 transition-transform duration-1000",
-                      "hover:cursor-pointer",
-                      isActive ? "rotate-180" : "rotate-0",
-                    ].join(" ")}
-                  />
+                  {/* Svg da seta */}
+                  <svg
+                    width="36"
+                    height="22"
+                    viewBox="0 0 36 22"
+                    className="shrink-0 text-primary cursor-pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g fill="none" stroke="currentColor" strokeWidth="1">
+                      <rect width="36" height="22" rx="11" stroke="none" />
+                      <rect
+                        x="0.5"
+                        y="0.5"
+                        width="35"
+                        height="21"
+                        rx="10.5"
+                        fill="none"
+                      />
+                    </g>
+                    <g transform="translate(11.832 6.168)">
+                      <g
+                        className={[
+                          "transition-transform duration-300 ease-in-out",
+                          isActive ? "rotate-90" : "rotate-0",
+                        ].join(" ")}
+                        style={{
+                          transformBox: "fill-box",
+                          transformOrigin: "center",
+                        }}
+                      >
+                        <path
+                          d="M6.557,8.92a.438.438,0,0,0,.619,0l4.079-4.086a.438.438,0,0,0,0-.619L7.176.128a.438.438,0,0,0-.62.619L9.889,4.086.438,4.079a.438.438,0,0,0,0,.876l9.453.007L6.556,8.3A.438.438,0,0,0,6.557,8.92Z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                        />
+                      </g>
+                    </g>
+                  </svg>
                 </div>
               </button>
             );

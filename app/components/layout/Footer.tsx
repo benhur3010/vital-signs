@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="container px-5 space-y-10 md:flex md:justify-between md:gap-10 lg:gap-0">
         <div className="xl:w-[48%] md:w-1/2 w-full space-y-8 text-center md:text-left">
           <Image
-            src="/logo.svg"
+            src="/logo-footer.png"
             alt="Logo Vital Signs"
             width={280}
             height={82}
@@ -49,7 +49,7 @@ export default function Footer() {
 
           <div className="mt-4 md:mt-0 flex items-start justify-center md:justify-start gap-3">
             <Image
-              src="/how-it-works/arrow-down.png"
+              src="/arrow-right.svg"
               alt="seta"
               width={29}
               height={17}
@@ -75,12 +75,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-5 md:flex-row md:items-center lg:w-[48%] md:w-1/2">
           <div className="flex gap-5 items-center justify-center md:justify-start">
             <a className="text-14">Baixe o app</a>
-            <Image
-              src="/how-it-works/arrow-down.png"
-              alt="seta"
-              width={29}
-              height={17}
-            />
+            <Image src="/arrow-right.svg" alt="seta" width={29} height={17} />
           </div>
 
           <div className="flex flex-col items-center space-y-2 lg:space-y-0 lg:flex-row lg:gap-5">
