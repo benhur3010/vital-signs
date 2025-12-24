@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 type Testimonial = {
   initial: string;
@@ -20,7 +20,7 @@ export default function Testimonials() {
         name: "Joana M., paciente",
         role: "Paciente",
         quote:
-          "Antes do VitalScore™, eu só descobria que minha pressão subia quando já estava mal. Agora recebo alertas e sigo orientações antes de piorar.",
+          "Antes do VitalScore™, eu só descobria que minha pressão subia quando quando já estava mal. Agora recebo alertas e sigo orientações antes de piorar.",
       },
       {
         initial: "R",
@@ -34,28 +34,28 @@ export default function Testimonials() {
         name: "Mariana S.",
         role: "Enfermeira",
         quote:
-          "Consigo acompanhar tendências com mais clareza e tomar decisões mais rápidas com base nos dados.",
+          "Uso a plataforma com meus pacientes idosos. A previsibilidade me ajuda a agir antes da urgência.",
       },
       {
-        initial: "M",
-        name: "Mariana S.",
-        role: "Enfermeira",
+        initial: "L",
+        name: "Lucas P.",
+        role: "Paciente",
         quote:
-          "Consigo acompanhar tendências com mais clareza e tomar decisões mais rápidas com base nos dados.",
+          "Uso a plataforma com meus pacientes idosos. A previsibilidade me ajuda a agir antes da urgência.",
       },
       {
-        initial: "M",
-        name: "Mariana S.",
-        role: "Enfermeira",
+        initial: "A",
+        name: "Ana C.",
+        role: "Nutricionista",
         quote:
-          "Consigo acompanhar tendências com mais clareza e tomar decisões mais rápidas com base nos dados.",
+          "Uso a plataforma com meus pacientes idosos. A previsibilidade me ajuda a agir antes da urgência.",
       },
       {
-        initial: "M",
-        name: "Mariana S.",
-        role: "Enfermeira",
+        initial: "C",
+        name: "Carla R.",
+        role: "Paciente",
         quote:
-          "Consigo acompanhar tendências com mais clareza e tomar decisões mais rápidas com base nos dados.",
+          "Uso a plataforma com meus pacientes idosos. A previsibilidade me ajuda a agir antes da urgência.",
       },
     ],
     []
@@ -63,11 +63,97 @@ export default function Testimonials() {
 
   const [index, setIndex] = useState(0);
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+
   const maxIndex = Math.max(0, testimonials.length - VISIBLE_COUNT);
 
   function next() {
     setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   }
+
+  function prev() {
+    setIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  }
+
+  const startYRef = useRef(0);
+  const lastYRef = useRef(0);
+  const startTimeRef = useRef(0);
+  const pointerIdRef = useRef<number | null>(null);
+
+  const rafRef = useRef<number | null>(null);
+  const pendingOffsetRef = useRef(0);
+
+  function setOffsetRaf(value: number) {
+    pendingOffsetRef.current = value;
+    if (rafRef.current != null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      setDragOffset(pendingOffsetRef.current);
+      rafRef.current = null;
+    });
+  }
+
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    pointerIdRef.current = e.pointerId;
+    e.currentTarget.setPointerCapture(e.pointerId);
+
+    setIsDragging(true);
+    startYRef.current = e.clientY;
+    lastYRef.current = e.clientY;
+    startTimeRef.current = performance.now();
+    setOffsetRaf(0);
+  }
+
+  function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (!isDragging) return;
+    if (pointerIdRef.current !== e.pointerId) return;
+
+    lastYRef.current = e.clientY;
+
+    const rawDy = e.clientY - startYRef.current;
+
+    const maxDrag = ITEM_HEIGHT * 0.9;
+    const dy = Math.max(-maxDrag, Math.min(maxDrag, rawDy));
+
+    setOffsetRaf(dy);
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+
+    const dy = pendingOffsetRef.current;
+    const dt = Math.max(1, performance.now() - startTimeRef.current);
+    const velocity = dy / dt;
+
+    const distanceThreshold = Math.max(40, ITEM_HEIGHT * 0.25);
+    const flickVelocity = 0.8;
+
+    const swipeUp = dy < -distanceThreshold || velocity < -flickVelocity;
+    const swipeDown = dy > distanceThreshold || velocity > flickVelocity;
+
+    setIsDragging(false);
+    setDragOffset(0);
+    pendingOffsetRef.current = 0;
+
+    if (swipeUp) next();
+    else if (swipeDown) prev();
+  }
+
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    if (pointerIdRef.current === e.pointerId) pointerIdRef.current = null;
+    endDrag();
+  }
+
+  function onPointerCancel(e: React.PointerEvent<HTMLDivElement>) {
+    if (pointerIdRef.current === e.pointerId) pointerIdRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+    pendingOffsetRef.current = 0;
+  }
+
+  const translateY = -index * ITEM_HEIGHT + dragOffset;
 
   return (
     <section className="max-w-260 mx-auto py-22">
@@ -82,15 +168,26 @@ export default function Testimonials() {
           DEPOIMENTOS
         </h4>
 
-        {/* “Carousel” vertical */}
         <div className="relative">
           <div
-            className="overflow-hidden"
+            className="
+              overflow-hidden select-none
+              touch-none cursor-grab active:cursor-grabbing
+            "
             style={{ height: ITEM_HEIGHT * VISIBLE_COUNT }}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerCancel}
           >
             <div
-              className="transition-transform duration-500 ease-in-out will-change-transform"
-              style={{ transform: `translateY(-${index * ITEM_HEIGHT}px)` }}
+              className={[
+                "will-change-transform",
+                isDragging
+                  ? "transition-none"
+                  : "transition-transform duration-500 ease-in-out",
+              ].join(" ")}
+              style={{ transform: `translateY(${translateY}px)` }}
             >
               {testimonials.map((t, i) => (
                 <div
@@ -125,7 +222,6 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* seta pra baixo */}
           <button
             type="button"
             onClick={next}
