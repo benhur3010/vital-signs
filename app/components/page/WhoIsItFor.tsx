@@ -22,23 +22,23 @@ export default function WhoIsItFor() {
         iconAlt: "Indicadores",
       },
       {
-        title: "Doenças\nCrônicas",
-        description: "Viva melhor com suporte\nremoto e dados contínuos.",
-        imageSrc: "/who-is-it-for/monitoramento-melhor-idade.png",
+        title: "Doenças Crônicas",
+        description: "Viva melhor com suporte remoto e dados contínuos.",
+        imageSrc: "/who-is-it-for/doencas-cronicas.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
       },
       {
-        title: "Medicina Preditiva\ne Preventiva",
-        description: "Antecipe riscos e evite\nemergências com VitalScore™.",
-        imageSrc: "/who-is-it-for/monitoramento-melhor-idade.png",
+        title: "Medicina Preditiva e Preventiva",
+        description: "Antecipe riscos e evite emergências com VitalScore™.",
+        imageSrc: "/who-is-it-for/medicina-preditiva.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
       },
       {
         title: "Gestação",
-        description: "Mais segurança para a\nmãe e bebê em cada fase.",
-        imageSrc: "/who-is-it-for/monitoramento-melhor-idade.png",
+        description: "Mais segurança para a mãe e bebê em cada fase.",
+        imageSrc: "/who-is-it-for/gestacao.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
       },
@@ -153,11 +153,13 @@ export default function WhoIsItFor() {
           </div>
         </div>
 
-        <div className="max-w-[85%] ml-auto mt-12">
+        <div className="w-full mt-12 lg:max-w-[85%] lg:ml-auto">
           <div
             ref={scrollerRef}
             className={[
-              "flex gap-8 overflow-x-auto pb-6",
+              "flex overflow-x-auto pb-6",
+              "gap-4 sm:gap-6 lg:gap-8",
+              "px-3 lg:px-0",
               isDragging ? "snap-none" : "snap-x snap-mandatory",
               "scroll-smooth",
               "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
@@ -202,32 +204,43 @@ export default function WhoIsItFor() {
               <article
                 key={`${item.title}-${idx}`}
                 data-card
-                className="relative shrink-0 snap-start w-80 h-112 rounded-2xl overflow-hidden"
+                className="
+    shrink-0 snap-start
+    w-full sm:w-1/2 lg:w-80
+    flex lg:block justify-center
+  "
               >
-                {/* Imagem de fundo */}
-                <Image
-                  src={item.imageSrc}
-                  alt={item.title.replace("\n", " ")}
-                  fill
-                  className="object-cover pointer-events-none"
-                  priority={false}
-                />
+                <div
+                  className="
+      relative h-112 overflow-hidden rounded-2xl
+      w-full max-w-[320px] mx-auto
+      sm:max-w-none
+    "
+                >
+                  {/* Imagem de fundo */}
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.title.replace("\n", " ")}
+                    fill
+                    className="object-cover pointer-events-none"
+                    priority={false}
+                  />
 
-                {/* Conteúdo */}
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white text-left pointer-events-none">
-                  <div className="mb-4 w-32">
-                    <Image
-                      src={item.iconSrc}
-                      alt={item.iconAlt}
-                      width={128}
-                      height={76}
-                      className="w-full h-auto"
-                    />
+                  {/* Conteúdo */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white text-left pointer-events-none">
+                    <div className="mb-4 w-32">
+                      <Image
+                        src={item.iconSrc}
+                        alt={item.iconAlt}
+                        width={128}
+                        height={76}
+                        className="w-full h-auto"
+                      />
+                    </div>
+
+                    <h6 className="max-w-42">{item.title}</h6>
+                    <p className="mt-2 font-light">{item.description}</p>
                   </div>
-
-                  <h6 className="max-w-42">{item.title}</h6>
-
-                  <p className="mt-2 font-light">{item.description}</p>
                 </div>
               </article>
             ))}
