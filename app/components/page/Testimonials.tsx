@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 type Testimonial = {
   initial: string;
@@ -10,7 +10,6 @@ type Testimonial = {
 };
 
 const VISIBLE_COUNT = 2;
-const ITEM_HEIGHT = 140;
 
 export default function Testimonials() {
   const testimonials = useMemo<Testimonial[]>(
@@ -66,6 +65,52 @@ export default function Testimonials() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
 
+  const [itemHeight, setItemHeight] = useState(140);
+  const measureRef = useRef<HTMLDivElement | null>(null);
+
+  const longest = useMemo(
+    () =>
+      testimonials.reduce(
+        (a, b) => (b.quote.length > a.quote.length ? b : a),
+        testimonials[0]
+      ),
+    [testimonials]
+  );
+
+  useLayoutEffect(() => {
+    const el = measureRef.current;
+    if (!el) return;
+
+    const ro = new ResizeObserver(() => {
+      const h = el.getBoundingClientRect().height;
+      const next = Math.max(140, Math.ceil(h + 8));
+
+      setItemHeight((prev) => (prev === next ? prev : next));
+    });
+
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [longest]);
+
+  useEffect(() => {
+    const mqMd = window.matchMedia("(min-width: 768px)");
+    const mqSm = window.matchMedia("(min-width: 640px)");
+
+    const apply = () => {
+      if (mqMd.matches) setItemHeight(140);
+      else if (mqSm.matches) setItemHeight(240);
+      else setItemHeight(340);
+    };
+
+    apply();
+    mqMd.addEventListener("change", apply);
+    mqSm.addEventListener("change", apply);
+    return () => {
+      mqMd.removeEventListener("change", apply);
+      mqSm.removeEventListener("change", apply);
+    };
+  }, []);
+
   const maxIndex = Math.max(0, testimonials.length - VISIBLE_COUNT);
 
   function next() {
@@ -114,7 +159,7 @@ export default function Testimonials() {
 
     const rawDy = e.clientY - startYRef.current;
 
-    const maxDrag = ITEM_HEIGHT * 0.9;
+    const maxDrag = itemHeight * 0.9;
     const dy = Math.max(-maxDrag, Math.min(maxDrag, rawDy));
 
     setOffsetRaf(dy);
@@ -127,7 +172,7 @@ export default function Testimonials() {
     const dt = Math.max(1, performance.now() - startTimeRef.current);
     const velocity = dy / dt;
 
-    const distanceThreshold = Math.max(40, ITEM_HEIGHT * 0.25);
+    const distanceThreshold = Math.max(40, itemHeight * 0.25);
     const flickVelocity = 0.8;
 
     const swipeUp = dy < -distanceThreshold || velocity < -flickVelocity;
@@ -153,28 +198,58 @@ export default function Testimonials() {
     pendingOffsetRef.current = 0;
   }
 
-  const translateY = -index * ITEM_HEIGHT + dragOffset;
+  const translateY = -index * itemHeight + dragOffset;
 
   return (
-    <section className="max-w-260 mx-auto py-22">
+    <section className="max-w-260 mx-auto md:py-22 py-10 px-5">
       <h3 className="text-primary font-bold text-center px-10">
         +10 mil sinais vitais <span className="font-normal">monitorados </span>
         98% <span className="font-normal">de precisão em alertas</span>{" "}
         preventivos
       </h3>
 
-      <div className="mt-20 grid grid-cols-[80px_1fr] gap-10 items-center">
+      <div className="mt-20 grid grid-cols-[80px_1fr] sm:gap-10 items-center">
         <h4 className="[writing-mode:vertical-rl] rotate-180 text-secondary font-medium">
           DEPOIMENTOS
         </h4>
 
         <div className="relative">
+          {/* Medidor invisível: calcula a altura real do item mais "alto" */}
+          <div
+            ref={measureRef}
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-0"
+          >
+            <div className="flex items-start md:items-center border-b py-5">
+              <div className="w-full flex flex-col md:flex-row md:items-center gap-6 md:gap-10 lg:gap-28">
+                <div className="md:w-45">
+                  <div className="h-10 w-10 rounded-full text-20 figtree bg-accent flex items-center justify-center text-secondary font-medium">
+                    {longest.initial}
+                  </div>
+
+                  <div className="mt-2">
+                    <div className="text-20 figtree font-medium text-secondary">
+                      {longest.name}
+                    </div>
+                    <div className="text-secondary font-light">
+                      {longest.role}
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-18 md:flex md:items-center md:max-w-108 text-[#bcbcbc]">
+                  “{longest.quote}”
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div
             className="
               overflow-hidden select-none
               touch-none cursor-grab active:cursor-grabbing
             "
-            style={{ height: ITEM_HEIGHT * VISIBLE_COUNT }}
+            style={{ height: itemHeight * VISIBLE_COUNT }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -192,12 +267,12 @@ export default function Testimonials() {
               {testimonials.map((t, i) => (
                 <div
                   key={`${t.name}-${i}`}
-                  className="flex items-center border-b py-5"
-                  style={{ height: ITEM_HEIGHT }}
+                  className="flex items-start md:items-center border-b py-5"
+                  style={{ height: itemHeight }}
                 >
-                  <div className="w-full flex gap-28">
+                  <div className="w-full flex flex-col md:flex-row md:items-center gap-6 md:gap-10 lg:gap-28">
                     {/* Nome e cargo */}
-                    <div className="w-45">
+                    <div className="md:w-45">
                       <div className="h-10 w-10 rounded-full text-20 figtree bg-accent flex items-center justify-center text-secondary font-medium">
                         {t.initial}
                       </div>
@@ -213,7 +288,7 @@ export default function Testimonials() {
                     </div>
 
                     {/* Depoimento */}
-                    <p className="text-18 flex items-center max-w-108 text-[#bcbcbc]">
+                    <p className="text-18 md:flex md:items-center md:max-w-108 text-[#bcbcbc]">
                       “{t.quote}”
                     </p>
                   </div>
