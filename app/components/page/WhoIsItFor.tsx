@@ -245,7 +245,7 @@ export default function WhoIsItFor() {
         </div>
 
         <div className="container">
-          <div className="flex-col flex items-center my-18 gap-2">
+          <div className="flex-col flex items-center lg:my-18 my-10 gap-2">
             <Image
               src="/who-is-it-for/icone-estetoscopio.png"
               alt="Pessoa praticando esporte"
@@ -257,46 +257,67 @@ export default function WhoIsItFor() {
             </h6>
           </div>
 
-          <div className="max-w-212 h-112 mx-auto flex gap-12">
+          <div
+            className="
+    max-w-212 mx-auto
+    flex flex-col items-center gap-6
+    md:flex-row md:items-stretch md:gap-8
+    lg:gap-12
+  "
+          >
+            {/* CARD 1 */}
             <div
               className="
-      group relative w-full overflow-hidden rounded-2xl
-      bg-[url('/who-is-it-for/profissionais-saude-clinica.png')]
-      bg-center bg-no-repeat
-      bg-size-[100%]
-      transition-[background-size,transform] duration-500 ease-out
-      hover:bg-size-[112%] hover:-translate-y-1
-      flex flex-col justify-end pl-6 pb-4 hover:cursor-pointer
+      group relative overflow-hidden rounded-2xl hover:cursor-pointer
+      w-full max-w-100
+      md:max-w-none md:flex-1 md:min-w-0
     "
             >
-              <div className="pointer-events-none absolute inset-0 bg-black/0 transition-opacity duration-500 group-hover:bg-black/35" />
-              <div className="relative">
-                <h6 className="max-w-38 leading-tight mb-2">
+              <div
+                className="
+        absolute inset-0
+        bg-[url('/who-is-it-for/profissionais-saude-clinica.png')]
+        bg-cover bg-center bg-no-repeat
+        transition-transform duration-500 ease-out
+        group-hover:scale-[1.06]
+      "
+              />
+              <div className="absolute inset-0 bg-black/0 transition-opacity duration-500 group-hover:bg-black/35" />
+
+              <div className="relative z-10 flex h-120 flex-col justify-end p-4 md:p-5 lg:pl-6 lg:pb-4">
+                <h6 className="leading-tight mb-2 text-sm md:text-base">
                   Profissionais de Saúde e Clínicas
                 </h6>
-                <p className="max-w-60 font-extralight leading-tight">
+                <p className="font-extralight leading-tight text-xs md:text-sm">
                   Melhore o desfecho clínico com dados objetivos em tempo real.
                 </p>
               </div>
             </div>
 
+            {/* CARD 2 */}
             <div
               className="
-      group relative w-full overflow-hidden rounded-2xl
-      bg-[url('/who-is-it-for/planos-e-operadoras.png')]
-      bg-center bg-no-repeat
-      bg-size-[100%]
-      transition-[background-size,transform] duration-500 ease-out
-      hover:bg-size-[112%] hover:-translate-y-1
-      flex flex-col justify-end px-6 pb-4 hover:cursor-pointer
+      group relative overflow-hidden rounded-2xl hover:cursor-pointer
+      w-full max-w-100
+      md:max-w-none md:flex-1 md:min-w-0
     "
             >
-              <div className="pointer-events-none absolute inset-0 bg-black/0 transition-opacity duration-500 group-hover:bg-black/35" />
-              <div className="relative">
-                <h6 className="max-w-50 leading-tight mb-2">
+              <div
+                className="
+        absolute inset-0
+        bg-[url('/who-is-it-for/planos-e-operadoras.png')]
+        bg-cover bg-center bg-no-repeat
+        transition-transform duration-500 ease-out
+        group-hover:scale-[1.06]
+      "
+              />
+              <div className="absolute inset-0 bg-black/0 transition-opacity duration-500 group-hover:bg-black/35" />
+
+              <div className="relative z-10 flex h-120 flex-col justify-end p-4 md:p-5 lg:px-6 lg:pb-4">
+                <h6 className="leading-tight mb-2 text-sm md:text-base">
                   Planos e Operadoras de Saúde
                 </h6>
-                <p className="font-extralight leading-tight">
+                <p className="font-extralight leading-tight text-xs md:text-sm">
                   Reduza custos com prevenção baseada em dados e maior adesão
                   dos beneficiários.
                 </p>
