@@ -339,13 +339,22 @@ export default function HowItWorks() {
             </p>
           </div>
 
-          <Image
-            src={active.overlayImage.src}
-            alt={active.overlayImage.alt}
-            width={active.overlayImage.width}
-            height={active.overlayImage.height}
-            className={active.overlayImage.className}
-          />
+          <span
+            className={[
+              active.overlayImage.className,
+              "w-fit h-fit overflow-hidden rounded-lg",
+              "bg-white/10 backdrop-blur-md backdrop-saturate-150",
+              "shadow-lg",
+            ].join(" ")}
+          >
+            <Image
+              src={active.overlayImage.src}
+              alt={active.overlayImage.alt}
+              width={active.overlayImage.width}
+              height={active.overlayImage.height}
+              className="block"
+            />
+          </span>
 
           <Image
             src={active.detailImage.src}

@@ -34,8 +34,8 @@ export default function Plans() {
           sua saúde!
         </h2>
 
-        <div className="flex justify-between items-center text-start mt-25 min-h-125 text-secondary">
-          <div className="w-105 pt-8 px-10 pb-11 bg-white rounded-2xl space-y-5">
+        <div className="flex flex-col lg:flex-row gap-15 lg:gap-0 lg:justify-between items-center text-start mt-25 min-h-125 text-secondary">
+          <div className="md:w-105 pt-8 mx-5 md:mx-0 px-10 pb-11 bg-white rounded-2xl space-y-5">
             <h4 className="text-primary font-bold">PLANO FREE</h4>
             <p>
               Acompanhe seus sinais vitais e histórico de saúde de forma
@@ -63,7 +63,7 @@ export default function Plans() {
             </button>
           </div>
 
-          <div className="w-115 pt-8 px-10 pb-4 bg-accent rounded-2xl space-y-5 relative">
+          <div className="md:w-115 pt-8 mx-5 md:mx-0 px-10 pb-4 bg-accent rounded-2xl space-y-5 relative">
             <h4 className="text-primary font-bold">PLANO ASSINATURA</h4>
             <p>
               Receba{" "}
@@ -96,10 +96,10 @@ export default function Plans() {
               <span className="ml-2">→</span>
             </button>
 
-            <div className="absolute bg-span fitgree py-1 px-5 rounded-full -top-5 right-0">
+            <div className="absolute bg-span fitgree py-1 px-5 rounded-full -top-5 lg:right-0">
               RECOMENDADO
             </div>
-            <div className="absolute bg-blue-light text-primary fitgree py-1 px-5 rounded-full -bottom-7 right-8">
+            <div className="absolute bg-blue-light text-primary fitgree py-1 px-5 rounded-full md:-bottom-7 right-8">
               Em breve integração com planos e operadoras
             </div>
           </div>
