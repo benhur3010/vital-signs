@@ -53,15 +53,15 @@ export default function StepByStep() {
         mainImageAlt: "Pessoa usando o aplicativo",
 
         topCard: {
-          src: "/step-by-step/cadastre-se-relative.png",
+          src: "/step-by-step/conecte-seu-dispositivo-relative.png",
           alt: "Card de métricas",
           width: 322,
           height: 137,
-          className: "absolute bottom-0 xl:left-70 md:left-90",
+          className: "absolute md:-bottom-15 bottom-0 xl:left-70 md:left-90",
         },
 
         bottomBadge: {
-          src: "/step-by-step/cadastre-se-relative-detail.png",
+          src: "/step-by-step/conecte-seu-dispositivo-detail.png",
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
@@ -97,7 +97,7 @@ export default function StepByStep() {
         mainImageAlt: "Pessoa usando o aplicativo",
 
         topCard: {
-          src: "/step-by-step/cadastre-se-relative.png",
+          src: "/step-by-step/profissionais-relative.png",
           alt: "Card de métricas",
           width: 322,
           height: 163,
@@ -249,13 +249,18 @@ export default function StepByStep() {
                   height: step.topCard.height,
                 }}
               >
-                <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative h-full w-full overflow-hidden rounded-lg shadow-lg">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-white/10 backdrop-blur-md backdrop-saturate-150"
+                  />
+
                   <Image
                     src={step.topCard.src}
                     alt={step.topCard.alt}
                     fill
                     sizes={`${step.topCard.width}px`}
-                    className="object-cover"
+                    className="relative z-10 object-cover"
                   />
                 </div>
               </div>
@@ -269,13 +274,17 @@ export default function StepByStep() {
                   height: step.bottomBadge.height,
                 }}
               >
-                <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative h-full w-full overflow-hidden rounded-lg shadow-lg">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-white/10 backdrop-blur-md backdrop-saturate-150"
+                  />
                   <Image
                     src={step.bottomBadge.src}
                     alt={step.bottomBadge.alt}
                     fill
                     sizes={`${step.bottomBadge.width}px`}
-                    className="object-cover"
+                    className="relative z-10 object-cover"
                   />
                 </div>
               </div>

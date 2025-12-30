@@ -5,7 +5,7 @@ export default function Plans() {
     <section
       className="
         relative h-400
-        bg-[url('/plans/bg-plano.png')] bg-no-repeat bg-cover bg-center
+        md:bg-[url('/plans/bg-plano.png')] bg-[url('/plans/bg-plano-mobile.png')] bg-no-repeat bg-cover bg-center
         overflow-hidden
       "
     >

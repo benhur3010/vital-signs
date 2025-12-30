@@ -228,7 +228,7 @@ export default function WhoIsItFor() {
 
                   {/* Conteúdo */}
                   <div className="absolute inset-x-0 bottom-0 p-6 text-white text-left pointer-events-none">
-                    <div className="mb-4 w-32">
+                    {/* <div className="mb-4 w-32">
                       <Image
                         src={item.iconSrc}
                         alt={item.iconAlt}
@@ -236,7 +236,7 @@ export default function WhoIsItFor() {
                         height={76}
                         className="w-full h-auto"
                       />
-                    </div>
+                    </div> */}
 
                     <h6 className="max-w-42">{item.title}</h6>
                     <p className="mt-2 font-light">{item.description}</p>
