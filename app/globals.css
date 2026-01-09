@@ -19,6 +19,8 @@
   --text-16: 1rem;
   --text-18: 1.125rem;
   --text-20: 1.25rem;
+
+  --breakpoint-xs: 25rem;
 }
 
 :root {

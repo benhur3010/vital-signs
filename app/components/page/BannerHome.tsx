@@ -4,19 +4,29 @@ export default function BannerHome() {
   return (
     <section className="bg-span pt-5">
       <div className="relative w-full">
-        <div className="relative w-full aspect-1920/820 2xl:aspect-1920/820">
-          <Image
-            src="/banner-home/banner-home.png"
-            alt="Banner Vital Signs"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+        <div className="relative w-full h-150 md:h-auto aspect-1920/820 2xl:aspect-1920/820">
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcSet="/banner-home/banner-home-mobile.png"
+            />
+            <source
+              media="(min-width: 768px)"
+              srcSet="/banner-home/banner-home.png"
+            />
+            <Image
+              src="/banner-home/banner-home.png"
+              alt="Banner Vital Signs"
+              fill
+              priority
+              sizes="(max-width: 767px) 100vw, 100vw"
+              className="md:object-cover object-contain object-center"
+            />
+          </picture>
 
           <div
             className="
-              absolute z-10
+              absolute z-10 hidden md:block
               left-[70%] top-[47%] -translate-x-1/2 -translate-y-1/2
               max-w-35 space-y-3 rounded-2xl p-4
               bg-[rgba(255,255,255,0.22)] border border-light
@@ -47,7 +57,7 @@ export default function BannerHome() {
         </div>
       </div>
 
-      <div className="max-w-240 mx-auto text-center py-12 px-5">
+      <div className="max-w-240 mx-auto text-center xs:py-12 py-5 px-5">
         {" "}
         <h5 className="font-light mx-auto text-primary">
           {" "}
