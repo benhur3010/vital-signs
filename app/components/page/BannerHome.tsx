@@ -57,7 +57,10 @@ export default function BannerHome() {
         </div>
       </div>
 
-      <div className="max-w-240 mx-auto text-center xs:py-12 py-5 px-5">
+      <div
+        className="max-w-240 mx-auto text-center xs:py-12 py-5 px-5"
+        id="quem-somos"
+      >
         {" "}
         <h5 className="font-light mx-auto text-primary">
           {" "}

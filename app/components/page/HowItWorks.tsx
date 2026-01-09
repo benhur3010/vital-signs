@@ -56,7 +56,7 @@ function FadeIn({
     <div
       className={[
         className,
-        "transition-opacity duration-2000 ease-out",
+        "transition-opacity duration-1000 ease-out",
         "motion-reduce:transition-none",
         show ? "opacity-100" : "opacity-0",
       ].join(" ")}
@@ -228,7 +228,7 @@ export default function HowItWorks() {
       : "self-center";
 
   return (
-    <section className="pt-12 max-w-290 px-5 mx-auto sm:pb-10">
+    <section className="pt-12 max-w-290 px-5 mx-auto sm:pb-10" id="como-funciona">
       <h4 className="text-secondary text-center">
         Confira como a Vital Signs
         <br />
@@ -353,6 +353,7 @@ export default function HowItWorks() {
               width={active.overlayImage.width}
               height={active.overlayImage.height}
               className="block"
+              loading="eager"
             />
           </span>
 

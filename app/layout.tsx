@@ -3,6 +3,7 @@ import { Figtree, Inter } from "next/font/google";
 import "./globals.css";
 import MenuHeader from "./components/layout/MenuHeader";
 import Footer from "./components/layout/Footer";
+import SideFloatingButton from "./components/layout/SideFloatingButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${figtree.variable}`}>
       <body>
         <MenuHeader />
+        <SideFloatingButton />
         {children}
         <Footer />
       </body>

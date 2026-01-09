@@ -75,7 +75,7 @@ export default function StepByStep() {
         mainImageAlt: "Pessoa usando o aplicativo",
 
         topCard: {
-          src: "/step-by-step/cadastre-se-relative.png",
+          src: "/step-by-step/acompanhe-sua-saude-relative.png",
           alt: "Card de métricas",
           width: 200,
           height: 139,
@@ -83,7 +83,7 @@ export default function StepByStep() {
         },
 
         bottomBadge: {
-          src: "/step-by-step/cadastre-se-relative-detail.png",
+          src: "/step-by-step/acompanhe-sua-saude-detail.png",
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
@@ -105,7 +105,7 @@ export default function StepByStep() {
         },
 
         bottomBadge: {
-          src: "/step-by-step/cadastre-se-relative-detail.png",
+          src: "/step-by-step/profissionais-detail.png",
           alt: "Ícones das lojas",
           width: 131,
           height: 133,
@@ -120,7 +120,7 @@ export default function StepByStep() {
         mainImageAlt: "Pessoa usando o aplicativo",
 
         topCard: {
-          src: "/step-by-step/cadastre-se-relative.png",
+          src: "/step-by-step/previna-relative.png",
           alt: "Card de métricas",
           width: 156,
           height: 133,
@@ -128,7 +128,7 @@ export default function StepByStep() {
         },
 
         bottomBadge: {
-          src: "/step-by-step/cadastre-se-relative-detail.png",
+          src: "/step-by-step/previna-detail.png",
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
@@ -169,7 +169,7 @@ export default function StepByStep() {
   const step = steps[renderIndex];
 
   return (
-    <section className="container">
+    <section className="container" id="passo-a-passo">
       <div className="px-5 lg:py-25 md:py-15 py-10">
         {/* Tabs */}
         <div
@@ -259,6 +259,7 @@ export default function StepByStep() {
                     src={step.topCard.src}
                     alt={step.topCard.alt}
                     fill
+                    loading="eager"
                     sizes={`${step.topCard.width}px`}
                     className="relative z-10 object-cover"
                   />
@@ -283,6 +284,7 @@ export default function StepByStep() {
                     src={step.bottomBadge.src}
                     alt={step.bottomBadge.alt}
                     fill
+                    loading="eager"
                     sizes={`${step.bottomBadge.width}px`}
                     className="relative z-10 object-cover"
                   />

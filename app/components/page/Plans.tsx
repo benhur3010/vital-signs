@@ -4,10 +4,11 @@ export default function Plans() {
   return (
     <section
       className="
-        relative h-400
+        relative h-500 md:h-400
         md:bg-[url('/plans/bg-plano.png')] bg-[url('/plans/bg-plano-mobile.png')] bg-no-repeat bg-cover bg-center
         overflow-hidden
       "
+      id="planos-e-modelos-de-acesso"
     >
       <div
         className="

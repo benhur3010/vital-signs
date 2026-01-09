@@ -122,7 +122,7 @@ export default function WhoIsItFor() {
   }, [cards.length]);
 
   return (
-    <section className=" bg-black pb-12">
+    <section className=" bg-black pb-12" id="pra-quem-e">
       <div className="bg-span px-5 pt-15 pb-32 rounded-br-[180px]">
         <div className="container text-center">
           <h2 className="text-primary font-light">
