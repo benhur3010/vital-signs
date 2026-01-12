@@ -87,7 +87,7 @@ export default function HowItWorks() {
         width: 245,
         height: 120,
         className:
-          "absolute top-58 left-18 xl:bottom-0 sm:bottom-[-20px] sm:top-auto sm:left-32",
+          "absolute top-58 right-0 sm:right-auto xl:bottom-0 sm:bottom-[-20px] sm:top-auto sm:left-32",
       },
       detailImage: {
         src: "/how-it-works/coleta-inteligente-dados-relative-detail.png",
@@ -95,7 +95,7 @@ export default function HowItWorks() {
         width: 53,
         height: 53,
         className:
-          "absolute xl:bottom-25 sm:bottom-20 sm:top-auto top-50 left-48 sm:left-68",
+          "absolute xl:bottom-25 sm:right-auto sm:bottom-20 sm:top-auto top-50 right-0 sm:left-68",
       },
     },
     {
@@ -117,7 +117,7 @@ export default function HowItWorks() {
         width: 142,
         height: 104,
         className:
-          "absolute xl:bottom-0 sm:bottom-[-20px] sm:top-auto top-58 left-18",
+          "absolute xl:bottom-0 sm:bottom-[-20px] sm:top-auto right-0 sm:right-auto top-58",
       },
       detailImage: {
         src: "/how-it-works/transmissao-segura-relative-detail.png",
@@ -125,7 +125,7 @@ export default function HowItWorks() {
         width: 53,
         height: 53,
         className:
-          "absolute xl:bottom-23 sm:bottom-18 sm:top-auto top-50 left-48",
+          "absolute xl:bottom-23 sm:bottom-18 sm:top-auto top-50 right-0 sm:right-auto",
       },
     },
     {
@@ -147,14 +147,14 @@ export default function HowItWorks() {
         width: 152,
         height: 119,
         className:
-          "absolute top-58 left-10 sm:top-[-40px] xl:top-0 xl:left-[-15px]",
+          "absolute top-0 left-10 sm:top-[-40px] xl:top-0 xl:left-[-15px]",
       },
       detailImage: {
         src: "/how-it-works/analise-ia-relative-detail.png",
         alt: "Detalhe",
         width: 53,
         height: 53,
-        className: "absolute top-50 left-40 xl:top-8 xl:left-28 sm:top-13",
+        className: "absolute top-23 left-40 xl:top-8 xl:left-28 sm:top-13",
       },
     },
     {
@@ -175,14 +175,16 @@ export default function HowItWorks() {
         alt: "Análise e suporte gráficos",
         width: 184,
         height: 119,
-        className: "absolute top-58 left-18 xl:top-0 sm:top-[-40px] sm:left-47",
+        className:
+          "absolute -top-10 right-0 sm:right-auto xl:top-0 sm:top-[-40px] sm:left-47",
       },
       detailImage: {
         src: "/how-it-works/alerta-e-suporte-relative-detail.png",
         alt: "Símbolo de alerta",
         width: 53,
         height: 53,
-        className: "absolute top-50 left-48 xl:top-25 sm:left-83 sm:top-15",
+        className:
+          "absolute top-15 right-5 sm:right-auto xl:top-25 sm:left-83 sm:top-15",
       },
     },
     {
@@ -204,7 +206,7 @@ export default function HowItWorks() {
         width: 245,
         height: 120,
         className:
-          "absolute top-58 left-18 xl:bottom-0 sm:top-auto sm:left-32 sm:bottom-[-20px]",
+          "absolute top-62 right-0 sm:right-auto xl:bottom-0 sm:top-auto sm:left-32 sm:bottom-[-20px]",
       },
       detailImage: {
         src: "/how-it-works/monitoramento-relative-detail.png",
@@ -212,7 +214,7 @@ export default function HowItWorks() {
         width: 53,
         height: 53,
         className:
-          "absolute top-47 left-60 xl:bottom-29 sm:top-auto sm:bottom-23 sm:left-78",
+          "absolute top-58 right-0 sm:right-auto xl:bottom-29 sm:top-auto sm:bottom-23 sm:left-78",
       },
     },
   ];
@@ -228,7 +230,10 @@ export default function HowItWorks() {
       : "self-center";
 
   return (
-    <section className="pt-12 max-w-290 px-5 mx-auto sm:pb-10" id="como-funciona">
+    <section
+      className="pt-12 max-w-290 px-5 mx-auto sm:pb-10"
+      id="como-funciona"
+    >
       <h4 className="text-secondary text-center">
         Confira como a Vital Signs
         <br />
