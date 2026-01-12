@@ -34,7 +34,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 157,
-          className: "absolute md:top-0 md:bottom-auto bottom-0 md:right-0",
+          className: "absolute md:top-0 top-20 md:bottom-auto bottom-0 right-0",
         },
 
         bottomBadge: {
@@ -43,7 +43,7 @@ export default function StepByStep() {
           width: 156,
           height: 133,
           className:
-            "absolute md:bottom-0 md:top-auto top-25 xl:right-40 md:right-30",
+            "absolute bottom-0 left-40 md:left-auto xl:right-40 md:right-30",
         },
       },
       {
@@ -57,7 +57,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 137,
-          className: "absolute md:-bottom-15 bottom-0 xl:left-70 md:left-90",
+          className: "absolute -bottom-15 xl:left-70 md:left-90",
         },
 
         bottomBadge: {
@@ -65,7 +65,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute md:top-0 top-25 xl:left-70 md:left-90",
+          className: "absolute md:top-0 top-25 xl:left-70 md:left-90 ",
         },
       },
       {
@@ -79,7 +79,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 200,
           height: 139,
-          className: "absolute md:top-0 top-25 xl:right-54 md:right-28",
+          className: "absolute md:top-0 top-28 xl:right-54 md:right-28 right-0",
         },
 
         bottomBadge: {
@@ -87,7 +87,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute bottom-0 xl:left-60 md:left-90",
+          className: "absolute bottom-0 xl:left-60 md:left-90 left-0",
         },
       },
       {
@@ -101,7 +101,7 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 322,
           height: 163,
-          className: "absolute bottom-0 xl:right-10 md:right-0",
+          className: "absolute -bottom-15 md:bottom-0 xl:right-10 right-0",
         },
 
         bottomBadge: {
@@ -110,7 +110,7 @@ export default function StepByStep() {
           width: 131,
           height: 133,
           className:
-            "absolute xl:top-25 md:top-45 top-30 xl:right-35 md:right-10",
+            "absolute xl:top-25 md:top-45 top-30 xl:right-35 md:right-10 left-0 md:left-auto",
         },
       },
       {
@@ -124,7 +124,8 @@ export default function StepByStep() {
           alt: "Card de métricas",
           width: 156,
           height: 133,
-          className: "absolute md:bottom-30 bottom-0 xl:right-33 md:right-10",
+          className:
+            "absolute md:bottom-30 top-35 md:top-auto xl:right-33 md:right-10 left-0 md:left-auto",
         },
 
         bottomBadge: {
@@ -132,7 +133,7 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute xl:top-0 md:top-5 top-35 xl:left-60 md:left-80",
+          className: "absolute xl:top-0 md:top-5 bottom-0 md:bottom-auto right-0 md:right-auto xl:left-60 md:left-80",
         },
       },
     ],
@@ -170,7 +171,7 @@ export default function StepByStep() {
 
   return (
     <section className="container" id="passo-a-passo">
-      <div className="px-5 lg:py-25 md:py-15 py-10">
+      <div className="px-5 py-25">
         {/* Tabs */}
         <div
           role="tablist"
