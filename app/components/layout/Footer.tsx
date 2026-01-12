@@ -34,15 +34,11 @@ export default function Footer() {
             className="mx-auto md:mx-0"
           />
           <p className="text-12 font-light">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            Para médicos, clínicas e operadoras, oferecemos o que sempre faltou:
+            informação precisa, em tempo real, que previne e cuida. Para você,
+            entregamos controle baseado em ciência e a possibilidade de fazer as
+            melhores escolhas. A incerteza entre uma consulta e outra ficou no
+            passado. Vital Signs Inteligência e cuidado para a vida acontecer.
           </p>
         </div>
         <div className="xl:w-[40%] lg:w-[45%] md:w-1/2 w-full text-center md:text-left md:flex md:justify-start lg:gap-17 gap-5">
