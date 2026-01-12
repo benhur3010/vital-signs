@@ -45,7 +45,7 @@ export default function WhoIsItFor() {
       {
         title: "Vital Corporativo",
         description: "Saúde preventiva para equipes e redução de absenteísmo",
-        imageSrc: "/who-is-it-for/monitoramento-melhor-idade.png",
+        imageSrc: "/who-is-it-for/vital-corporativo.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
       },

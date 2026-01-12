@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo } from "react";
+import { InstagramIcon, LinkedInIcon, YouTubeIcon } from "../icons/social";
 type NavItem = { href: string; label: string };
 
 export default function Footer() {
@@ -99,25 +100,26 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-5 md:flex-row md:justify-end md:items-center md:w-1/2 lg:w-[40%] lg:gap-15">
           <p className="text-11">Siga a gente nas redes sociais</p>
 
-          <div className="flex gap-3 items-start justify-center md:justify-start">
-            <Image
-              src="/how-it-works/alerta-e-suporte-relative-detail.png"
-              alt="seta"
-              width={21}
-              height={21}
-            />
-            <Image
-              src="/how-it-works/alerta-e-suporte-relative-detail.png"
-              alt="seta"
-              width={21}
-              height={21}
-            />
-            <Image
-              src="/how-it-works/alerta-e-suporte-relative-detail.png"
-              alt="seta"
-              width={21}
-              height={21}
-            />
+          <div className="flex gap-3 items-center justify-center md:justify-start">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="inline-grid size-9 place-items-center leading-none text-white transition-colors hover:text-blue-light"
+            >
+              <InstagramIcon className="block size-5" />
+            </a>
+
+            <a className="inline-grid size-9 place-items-center leading-none text-white transition-colors hover:text-blue-light">
+              <LinkedInIcon className="block size-5 " />
+            </a>
+
+            <a
+              href="#"
+              aria-label="YouTube"
+              className="inline-grid size-9 place-items-center leading-none text-white transition-colors hover:text-blue-light"
+            >
+              <YouTubeIcon className="block size-5 translate-y-0.5 transition-transform duration-200 ease-out group-hover:scale-110" />
+            </a>
           </div>
         </div>
       </div>
