@@ -10,9 +10,9 @@ type Callout = {
   id: string;
   img: string;
   alt: string;
-  anchor: ResponsivePos; // bolinha no "braço"
-  card: ResponsivePos; // posição do card (centro)
-  depth: number; // intensidade do parallax
+  anchor: ResponsivePos;
+  card: ResponsivePos;
+  depth: number;
   w: number;
   h: number;
   variant: "plain" | "glass";
@@ -32,9 +32,11 @@ function lerp(a: number, b: number, t: number) {
 export default function Plans() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const calloutWrapRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const lineRefs = useRef<Record<string, SVGLineElement | null>>({});
   const dotRefs = useRef<Record<string, SVGCircleElement | null>>({});
+
+  const resolvedRef = useRef<Record<string, { anchor: XY; card: XY }>>({});
 
   const GLASS_BLUR = 6.16;
   const GLASS_BG = "rgba(246, 246, 246, 0.15)";
@@ -42,32 +44,35 @@ export default function Plans() {
   const BORDER_GRADIENT =
     "linear-gradient(180deg, rgba(252,252,252,0.45) 0%, rgba(216,215,215,0.45) 100%)";
   const GLASS_RADIUS = 14;
+
   const CALLOUTS = useMemo<Callout[]>(
     () => [
       {
         id: "oxigenacao",
         img: "/plans/oxigenacao-do-sangue.png",
         alt: "Oxigenação do sangue",
-        anchor: { lg: { x: 91, y: 67 } },
-        card: { lg: { x: 88, y: 60 } },
+        anchor: { lg: { x: 69, y: 67 } },
+        card: { lg: { x: 62, y: 58 } },
         depth: 0.9,
         w: 138,
         h: 95,
         variant: "plain",
-        attach: { x: -0.4, y: 0 },
-        attachOffsetPx: { y: -10 },
+        attach: { x: -0.5, y: -0.2 },
+        attachOffsetPx: { y: 0 },
+        stopAtCardEdge: true,
+        stopPaddingPx: 0,
       },
       {
         id: "distancia",
         img: "/plans/distancia-caminhada.png",
         alt: "Distância caminhada",
-        anchor: { lg: { x: 56, y: 72 } },
-        card: { lg: { x: 67, y: 67 } },
+        anchor: { lg: { x: 33, y: 72 } },
+        card: { lg: { x: 42, y: 64 } },
         depth: 0.75,
         w: 108,
         h: 108,
         variant: "glass",
-        attach: { x: 0, y: -0.5 },
+        attach: { x: 0, y: 0.4 },
         attachOffsetPx: { y: 10 },
         stopAtCardEdge: true,
         stopPaddingPx: 0,
@@ -76,8 +81,8 @@ export default function Plans() {
         id: "distancia2",
         img: "/plans/distancia-caminhada-2.png",
         alt: "Distância caminhada 2",
-        anchor: { lg: { x: 80, y: 74 } },
-        card: { lg: { x: 87, y: 87 } },
+        anchor: { lg: { x: 58, y: 75 } },
+        card: { lg: { x: 62, y: 85 } },
         depth: 1.0,
         w: 110,
         h: 97,
@@ -129,6 +134,19 @@ export default function Plans() {
     return { x: x1 + u1 * dx, y: y1 + u1 * dy };
   }
 
+  function resolveCenterOffset(pos: XY, rectW: number, rectH: number): XY {
+    const isPercent = pos.x >= 0 && pos.x <= 100 && pos.y >= 0 && pos.y <= 100;
+
+    if (isPercent) {
+      return {
+        x: rectW * (pos.x / 100 - 0.5),
+        y: rectH * (pos.y / 100 - 0.5),
+      };
+    }
+
+    return { x: pos.x, y: pos.y };
+  }
+
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -152,18 +170,40 @@ export default function Plans() {
     window.addEventListener("scroll", updateRect, { passive: true });
     window.addEventListener("resize", updateRect);
 
+    const ensureResolved = () => {
+      for (const c of CALLOUTS) {
+        if (resolvedRef.current[c.id]) continue;
+
+        resolvedRef.current[c.id] = {
+          anchor: resolveCenterOffset(c.anchor.lg, rect.width, rect.height),
+          card: resolveCenterOffset(c.card.lg, rect.width, rect.height),
+        };
+      }
+    };
+
     const draw = (shiftX: number, shiftY: number) => {
       if (!isLg()) return;
 
+      ensureResolved();
+
       for (const c of CALLOUTS) {
-        const a = c.anchor.lg;
-        const k = c.card.lg;
+        const resolved = resolvedRef.current[c.id];
+        if (!resolved) continue;
 
-        const x1 = (rect.width * a.x) / 100;
-        const y1 = (rect.height * a.y) / 100;
+        const x1 = rect.width / 2 + resolved.anchor.x;
+        const y1 = rect.height / 2 + resolved.anchor.y;
 
-        const cx = (rect.width * k.x) / 100 + shiftX * c.depth;
-        const cy = (rect.height * k.y) / 100 + shiftY * c.depth;
+        const cxBase = rect.width / 2 + resolved.card.x;
+        const cyBase = rect.height / 2 + resolved.card.y;
+
+        const cx = cxBase + shiftX * c.depth;
+        const cy = cyBase + shiftY * c.depth;
+
+        const wrap = calloutWrapRefs.current[c.id];
+        if (wrap) {
+          wrap.style.left = `${cx}px`;
+          wrap.style.top = `${cy}px`;
+        }
 
         const ax = c.attach?.x ?? 0.5;
         const ay = c.attach?.y ?? 0.5;
@@ -193,6 +233,7 @@ export default function Plans() {
             right,
             bottom
           );
+
           if (entry) {
             const pad = c.stopPaddingPx ?? 6;
 
@@ -219,13 +260,6 @@ export default function Plans() {
         if (dot) {
           dot.setAttribute("cx", String(x1));
           dot.setAttribute("cy", String(y1));
-        }
-
-        const cardEl = cardRefs.current[c.id];
-        if (cardEl) {
-          cardEl.style.transform = `translate(-50%, -50%) translate3d(${
-            shiftX * c.depth
-          }px, ${shiftY * c.depth}px, 0)`;
         }
       }
     };
@@ -316,13 +350,11 @@ export default function Plans() {
           height: h,
           borderRadius: GLASS_RADIUS,
           overflow: "hidden",
-
           border: `${BORDER_THICKNESS}px solid transparent`,
           background: `
           linear-gradient(${GLASS_BG}, ${GLASS_BG}) padding-box,
           ${BORDER_GRADIENT} border-box
         `,
-
           backdropFilter: `blur(${GLASS_BLUR}px) saturate(1.15)`,
           WebkitBackdropFilter: `blur(${GLASS_BLUR}px) saturate(1.15)`,
         }}
@@ -356,12 +388,12 @@ export default function Plans() {
         />
 
         <Image
-          src="/plans/bg-plano.png"
+          src="/plans/vitalsings.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="hidden md:block object-fill"
+          className="hidden md:block object-cover"
         />
       </div>
 
@@ -401,37 +433,29 @@ export default function Plans() {
           ))}
         </svg>
 
-        {CALLOUTS.map((c) => {
-          const pos = c.card.lg;
-
-          return (
-            <div
-              key={c.id}
-              className="absolute"
-              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-            >
-              <div
-                ref={(el) => {
-                  cardRefs.current[c.id] = el;
-                }}
-                className="pointer-events-auto -translate-x-1/2 -translate-y-1/2 will-change-transform"
-              >
-                {c.variant === "glass" ? (
-                  <GlassImage src={c.img} alt={c.alt} w={c.w} h={c.h} />
-                ) : (
-                  <Image
-                    src={c.img}
-                    alt={c.alt}
-                    width={c.w}
-                    height={c.h}
-                    className="block h-auto w-auto drop-shadow-md"
-                    priority={false}
-                  />
-                )}
-              </div>
-            </div>
-          );
-        })}
+        {CALLOUTS.map((c) => (
+          <div
+            key={c.id}
+            ref={(el) => {
+              calloutWrapRefs.current[c.id] = el;
+            }}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: "50%", top: "50%" }}
+          >
+            {c.variant === "glass" ? (
+              <GlassImage src={c.img} alt={c.alt} w={c.w} h={c.h} />
+            ) : (
+              <Image
+                src={c.img}
+                alt={c.alt}
+                width={c.w}
+                height={c.h}
+                className="block h-auto w-auto drop-shadow-md"
+                priority={false}
+              />
+            )}
+          </div>
+        ))}
       </div>
 
       <div className="relative z-30 max-w-230 mx-auto 2xl:pt-19 pt-5 text-center">
