@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import { ExpandablePill } from "../ExpandablePill";
 
 type XY = { x: number; y: number };
 type ResponsivePos = { lg: XY };
@@ -439,25 +440,35 @@ export default function Plans() {
 
       <div className="relative z-30 max-w-230 mx-auto pt-5 text-center">
         <h2>
-          Invista na{" "}
-          <Image
-            src="/plans/relogio-pulso.png"
-            alt="pessoa praticando esporte"
-            width={68}
-            height={48}
-            className="inline-block align-middle h-12 w-17"
-            priority={false}
-          />{" "}
+          {/* Linha 1 */}
+          <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+            <span>Invista na</span>
+
+            <ExpandablePill
+              collapsedSrc="/plans/relogio-pulso.png"
+              expandedSrc="/plans/relogio-pulso-expandida.png"
+              alt="relógio no pulso"
+              height={48}
+              collapsedWidth={70}
+              expandedWidth={181}
+            />
+          </span>
+
           <br />
-          <Image
-            src="/plans/fone-de-ouvido.png"
-            alt="coração"
-            width={68}
-            height={48}
-            className="inline-block align-middle h-12 w-17"
-            priority={false}
-          />{" "}
-          sua saúde!
+
+          {/* Linha 2 */}
+          <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+            <ExpandablePill
+              collapsedSrc="/plans/fone-de-ouvido.png"
+              expandedSrc="/plans/fone-de-ouvido-expandida.png"
+              alt="fone de ouvido"
+              height={48}
+              collapsedWidth={70}
+              expandedWidth={181}
+            />
+
+            <span>sua saúde!</span>
+          </span>
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-15 lg:gap-0 lg:justify-between items-center text-start mt-20 min-h-125 text-secondary">

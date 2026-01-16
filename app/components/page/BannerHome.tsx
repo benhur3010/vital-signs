@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ExpandablePill } from "../ExpandablePill";
 
 export default function BannerHome() {
   return (
@@ -76,27 +77,59 @@ export default function BannerHome() {
       <div className="bg-primary py-8 px-5">
         <div className="max-w-160 mx-auto text-center">
           <h2 className="text-span font-light">
-            Feito {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/banner-home/homem-raquete.png"
-              alt="pessoa praticando esporte"
-              className="inline-block align-middle h-12 w-17"
-            />{" "}
-            para quem <span className="font-bold">vive</span>{" "}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/banner-home/mulher-natureza.png"
-              alt="coração"
-              className="inline-block align-middle h-12 w-17"
-            />{" "}
-            e para quem{" "}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/banner-home/medico.png"
-              alt="coração"
-              className="inline-block align-middle h-12 w-17"
-            />{" "}
-            <span className="font-bold">cuida.</span>
+            {/* Linha 1 */}
+            <span className="block">
+              <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+                <span>Feito</span>
+
+                <ExpandablePill
+                  collapsedSrc="/banner-home/homem-raquete.png"
+                  expandedSrc="/banner-home/homem-raquete-expandida.png"
+                  alt="pessoa praticando esporte"
+                  height={48}
+                  collapsedWidth={70}
+                  expandedWidth={181}
+                />
+
+                <span>pra quem</span>
+              </span>
+            </span>
+
+            {/* Linha 2 */}
+            <span className="block mt-2">
+              <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+                <span className="font-bold">vive</span>
+
+                <ExpandablePill
+                  collapsedSrc="/banner-home/mulher-natureza.png"
+                  expandedSrc="/banner-home/mulher-natureza-expandida.png"
+                  alt="pessoa na natureza"
+                  height={48}
+                  collapsedWidth={70}
+                  expandedWidth={181}
+                />
+
+                <span>e para</span>
+              </span>
+            </span>
+
+            {/* Linha 3 */}
+            <span className="block mt-2">
+              <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+                <span>quem</span>
+
+                <ExpandablePill
+                  collapsedSrc="/banner-home/medico.png"
+                  expandedSrc="/banner-home/medico-expandida.png"
+                  alt="profissional de saúde"
+                  height={48}
+                  collapsedWidth={70}
+                  expandedWidth={181}
+                />
+
+                <span className="font-bold">cuida.</span>
+              </span>
+            </span>
           </h2>
         </div>
       </div>

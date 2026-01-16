@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ExpandablePill } from "../ExpandablePill";
 
 type CardItem = {
   title: string;
@@ -126,20 +127,40 @@ export default function WhoIsItFor() {
       <div className="bg-span px-5 pt-15 pb-32 rounded-br-[180px]">
         <div className="container text-center">
           <h2 className="text-primary font-light">
-            Seu corpo {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/who-is-it-for/homem-camisa-branca.png"
-              alt="pessoa praticando esporte"
-              className="inline-block align-middle h-12 w-17"
-            />{" "}
-            <span className="font-bold">fala.</span> <br />A{" "}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/who-is-it-for/relogio.png"
-              alt="coração"
-              className="inline-block align-middle h-12 w-17"
-            />{" "}
-            <span className="font-bold">tecnologia</span> traduz.
+            {/* Linha 1 */}
+            <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+              <span>Seu corpo</span>
+
+              <ExpandablePill
+                collapsedSrc="/who-is-it-for/homem-camisa-branca.png"
+                expandedSrc="/who-is-it-for/homem-camisa-branca-expandida.png"
+                alt="pessoa praticando esporte"
+                height={48}
+                collapsedWidth={70}
+                expandedWidth={181}
+              />
+
+              <span className="font-bold">fala.</span>
+            </span>
+
+            <br />
+
+            {/* Linha 2 */}
+            <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+              <span>A</span>
+
+              <ExpandablePill
+                collapsedSrc="/who-is-it-for/relogio.png"
+                expandedSrc="/who-is-it-for/relogio-expandida.png"
+                alt="relógio"
+                height={48}
+                collapsedWidth={70}
+                expandedWidth={181}
+              />
+
+              <span className="font-bold">tecnologia</span>
+              <span>traduz.</span>
+            </span>
           </h2>
 
           <div className="flex-col flex items-center mt-15 gap-2">
@@ -204,19 +225,9 @@ export default function WhoIsItFor() {
               <article
                 key={`${item.title}-${idx}`}
                 data-card
-                className="
-    shrink-0 snap-start
-    w-full sm:w-1/2 lg:w-80
-    flex lg:block justify-center
-  "
+                className="shrink-0 snap-start w-full sm:w-1/2 lg:w-80 flex lg:block justify-center"
               >
-                <div
-                  className="
-      relative h-112 overflow-hidden rounded-2xl
-      w-full max-w-[320px] mx-auto
-      sm:max-w-none
-    "
-                >
+                <div className="relative h-112 overflow-hidden rounded-2xl w-full max-w-[320px] mx-auto sm:max-w-none">
                   {/* Imagem de fundo */}
                   <Image
                     src={item.imageSrc}
