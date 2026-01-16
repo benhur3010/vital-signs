@@ -29,14 +29,51 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
+function segmentRectEntry(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  left: number,
+  top: number,
+  right: number,
+  bottom: number
+): { x: number; y: number } | null {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+
+  let u1 = 0;
+  let u2 = 1;
+
+  const p = [-dx, dx, -dy, dy];
+  const q = [x1 - left, right - x1, y1 - top, bottom - y1];
+
+  for (let i = 0; i < 4; i++) {
+    const pi = p[i];
+    const qi = q[i];
+
+    if (pi === 0) {
+      if (qi < 0) return null;
+      continue;
+    }
+
+    const u = qi / pi;
+    if (pi < 0) u1 = Math.max(u1, u);
+    else u2 = Math.min(u2, u);
+
+    if (u1 > u2) return null;
+  }
+
+  return { x: x1 + u1 * dx, y: y1 + u1 * dy };
+}
+
 export default function Plans() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
-  const calloutWrapRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const lineRefs = useRef<Record<string, SVGLineElement | null>>({});
   const dotRefs = useRef<Record<string, SVGCircleElement | null>>({});
-
-  const resolvedRef = useRef<Record<string, { anchor: XY; card: XY }>>({});
 
   const GLASS_BLUR = 6.16;
   const GLASS_BG = "rgba(246, 246, 246, 0.15)";
@@ -51,8 +88,8 @@ export default function Plans() {
         id: "oxigenacao",
         img: "/plans/oxigenacao-do-sangue.png",
         alt: "Oxigenação do sangue",
-        anchor: { lg: { x: 69, y: 67 } },
-        card: { lg: { x: 62, y: 58 } },
+        anchor: { lg: { x: 85, y: 67 } },
+        card: { lg: { x: 70, y: 58 } },
         depth: 0.9,
         w: 138,
         h: 95,
@@ -66,8 +103,8 @@ export default function Plans() {
         id: "distancia",
         img: "/plans/distancia-caminhada.png",
         alt: "Distância caminhada",
-        anchor: { lg: { x: 33, y: 72 } },
-        card: { lg: { x: 42, y: 64 } },
+        anchor: { lg: { x: 20, y: 72 } },
+        card: { lg: { x: 35, y: 64 } },
         depth: 0.75,
         w: 108,
         h: 108,
@@ -81,8 +118,8 @@ export default function Plans() {
         id: "distancia2",
         img: "/plans/distancia-caminhada-2.png",
         alt: "Distância caminhada 2",
-        anchor: { lg: { x: 58, y: 75 } },
-        card: { lg: { x: 62, y: 85 } },
+        anchor: { lg: { x: 64, y: 75 } },
+        card: { lg: { x: 73, y: 85 } },
         depth: 1.0,
         w: 110,
         h: 97,
@@ -96,60 +133,9 @@ export default function Plans() {
     []
   );
 
-  function segmentRectEntry(
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number,
-    left: number,
-    top: number,
-    right: number,
-    bottom: number
-  ): { x: number; y: number } | null {
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-
-    let u1 = 0;
-    let u2 = 1;
-
-    const p = [-dx, dx, -dy, dy];
-    const q = [x1 - left, right - x1, y1 - top, bottom - y1];
-
-    for (let i = 0; i < 4; i++) {
-      const pi = p[i];
-      const qi = q[i];
-
-      if (pi === 0) {
-        if (qi < 0) return null;
-        continue;
-      }
-
-      const u = qi / pi;
-      if (pi < 0) u1 = Math.max(u1, u);
-      else u2 = Math.min(u2, u);
-
-      if (u1 > u2) return null;
-    }
-
-    return { x: x1 + u1 * dx, y: y1 + u1 * dy };
-  }
-
-  function resolveCenterOffset(pos: XY, rectW: number, rectH: number): XY {
-    const isPercent = pos.x >= 0 && pos.x <= 100 && pos.y >= 0 && pos.y <= 100;
-
-    if (isPercent) {
-      return {
-        x: rectW * (pos.x / 100 - 0.5),
-        y: rectH * (pos.y / 100 - 0.5),
-      };
-    }
-
-    return { x: pos.x, y: pos.y };
-  }
-
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const stage = stageRef.current;
+    if (!stage) return;
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -160,50 +146,28 @@ export default function Plans() {
 
     const isLg = () => window.innerWidth >= 1024;
 
-    let rect = section.getBoundingClientRect();
+    let rect = stage.getBoundingClientRect();
     const updateRect = () => {
-      rect = section.getBoundingClientRect();
+      rect = stage.getBoundingClientRect();
     };
 
     const ro = new ResizeObserver(updateRect);
-    ro.observe(section);
+    ro.observe(stage);
     window.addEventListener("scroll", updateRect, { passive: true });
     window.addEventListener("resize", updateRect);
-
-    const ensureResolved = () => {
-      for (const c of CALLOUTS) {
-        if (resolvedRef.current[c.id]) continue;
-
-        resolvedRef.current[c.id] = {
-          anchor: resolveCenterOffset(c.anchor.lg, rect.width, rect.height),
-          card: resolveCenterOffset(c.card.lg, rect.width, rect.height),
-        };
-      }
-    };
 
     const draw = (shiftX: number, shiftY: number) => {
       if (!isLg()) return;
 
-      ensureResolved();
-
       for (const c of CALLOUTS) {
-        const resolved = resolvedRef.current[c.id];
-        if (!resolved) continue;
+        const a = c.anchor.lg;
+        const k = c.card.lg;
 
-        const x1 = rect.width / 2 + resolved.anchor.x;
-        const y1 = rect.height / 2 + resolved.anchor.y;
+        const x1 = (rect.width * a.x) / 100;
+        const y1 = (rect.height * a.y) / 100;
 
-        const cxBase = rect.width / 2 + resolved.card.x;
-        const cyBase = rect.height / 2 + resolved.card.y;
-
-        const cx = cxBase + shiftX * c.depth;
-        const cy = cyBase + shiftY * c.depth;
-
-        const wrap = calloutWrapRefs.current[c.id];
-        if (wrap) {
-          wrap.style.left = `${cx}px`;
-          wrap.style.top = `${cy}px`;
-        }
+        const cx = (rect.width * k.x) / 100 + shiftX * c.depth;
+        const cy = (rect.height * k.y) / 100 + shiftY * c.depth;
 
         const ax = c.attach?.x ?? 0.5;
         const ay = c.attach?.y ?? 0.5;
@@ -236,7 +200,6 @@ export default function Plans() {
 
           if (entry) {
             const pad = c.stopPaddingPx ?? 6;
-
             const dx = x2Target - x1;
             const dy = y2Target - y1;
             const len = Math.hypot(dx, dy) || 1;
@@ -260,6 +223,13 @@ export default function Plans() {
         if (dot) {
           dot.setAttribute("cx", String(x1));
           dot.setAttribute("cy", String(y1));
+        }
+
+        const cardEl = cardRefs.current[c.id];
+        if (cardEl) {
+          cardEl.style.transform = `translate(-50%, -50%) translate3d(${
+            shiftX * c.depth
+          }px, ${shiftY * c.depth}px, 0)`;
         }
       }
     };
@@ -298,8 +268,8 @@ export default function Plans() {
       target.y = 0;
     };
 
-    section.addEventListener("pointermove", onMove);
-    section.addEventListener("pointerleave", onLeave);
+    stage.addEventListener("pointermove", onMove);
+    stage.addEventListener("pointerleave", onLeave);
 
     const MAX_SHIFT = 18;
 
@@ -324,8 +294,8 @@ export default function Plans() {
 
     return () => {
       cancelAnimationFrame(raf);
-      section.removeEventListener("pointermove", onMove);
-      section.removeEventListener("pointerleave", onLeave);
+      stage.removeEventListener("pointermove", onMove);
+      stage.removeEventListener("pointerleave", onLeave);
       ro.disconnect();
       window.removeEventListener("scroll", updateRect);
       window.removeEventListener("resize", updateRect);
@@ -351,10 +321,7 @@ export default function Plans() {
           borderRadius: GLASS_RADIUS,
           overflow: "hidden",
           border: `${BORDER_THICKNESS}px solid transparent`,
-          background: `
-          linear-gradient(${GLASS_BG}, ${GLASS_BG}) padding-box,
-          ${BORDER_GRADIENT} border-box
-        `,
+          background: `linear-gradient(${GLASS_BG}, ${GLASS_BG}) padding-box, ${BORDER_GRADIENT} border-box`,
           backdropFilter: `blur(${GLASS_BLUR}px) saturate(1.15)`,
           WebkitBackdropFilter: `blur(${GLASS_BLUR}px) saturate(1.15)`,
         }}
@@ -374,7 +341,7 @@ export default function Plans() {
   return (
     <section
       ref={sectionRef}
-      className="relative 2xl:h-430 h-380 overflow-hidden"
+      className="relative h-380 overflow-hidden"
       id="planos-e-modelos-de-acesso"
     >
       <div className="absolute inset-0 z-0">
@@ -386,7 +353,6 @@ export default function Plans() {
           sizes="100vw"
           className="md:hidden object-cover object-center"
         />
-
         <Image
           src="/plans/vitalsings.png"
           alt=""
@@ -399,66 +365,79 @@ export default function Plans() {
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-black via-black/60 to-transparent z-10" />
 
-      <div className="absolute inset-0 z-20 hidden lg:block">
-        <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
-          <defs>
-            <filter id="softGlow">
-              <feGaussianBlur stdDeviation="1.2" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+      <div className="absolute inset-0 z-20 hidden lg:block pointer-events-none">
+        <div
+          ref={stageRef}
+          className="relative mx-auto h-full w-full max-w-230"
+        >
+          <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
+            <defs>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="1.2" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-          {CALLOUTS.map((c) => (
-            <g key={c.id} filter="url(#softGlow)">
-              <line
-                ref={(el) => {
-                  lineRefs.current[c.id] = el;
-                }}
-                stroke="white"
-                strokeWidth="1"
-                strokeLinecap="round"
-                opacity="0.95"
-              />
-              <circle
-                ref={(el) => {
-                  dotRefs.current[c.id] = el;
-                }}
-                r="5"
-                fill="white"
-              />
-            </g>
-          ))}
-        </svg>
+            {CALLOUTS.map((c) => (
+              <g key={c.id} filter="url(#softGlow)">
+                <line
+                  ref={(el) => {
+                    lineRefs.current[c.id] = el;
+                  }}
+                  stroke="white"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  opacity="0.95"
+                />
+                <circle
+                  ref={(el) => {
+                    dotRefs.current[c.id] = el;
+                  }}
+                  r="5"
+                  fill="white"
+                />
+              </g>
+            ))}
+          </svg>
 
-        {CALLOUTS.map((c) => (
-          <div
-            key={c.id}
-            ref={(el) => {
-              calloutWrapRefs.current[c.id] = el;
-            }}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: "50%", top: "50%" }}
-          >
-            {c.variant === "glass" ? (
-              <GlassImage src={c.img} alt={c.alt} w={c.w} h={c.h} />
-            ) : (
-              <Image
-                src={c.img}
-                alt={c.alt}
-                width={c.w}
-                height={c.h}
-                className="block h-auto w-auto drop-shadow-md"
-                priority={false}
-              />
-            )}
-          </div>
-        ))}
+          {CALLOUTS.map((c) => {
+            const pos = c.card.lg;
+
+            return (
+              <div
+                key={c.id}
+                className="absolute pointer-events-auto"
+                style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+              >
+                <div
+                  ref={(el) => {
+                    cardRefs.current[c.id] = el;
+                  }}
+                  className="will-change-transform"
+                >
+                  {c.variant === "glass" ? (
+                    <GlassImage src={c.img} alt={c.alt} w={c.w} h={c.h} />
+                  ) : (
+                    <Image
+                      src={c.img}
+                      alt={c.alt}
+                      width={c.w}
+                      height={c.h}
+                      className="block h-auto w-auto drop-shadow-md"
+                      priority={false}
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="relative z-30 max-w-230 mx-auto 2xl:pt-19 pt-5 text-center">
+      <div className="relative z-30 max-w-230 mx-auto pt-5 text-center">
         <h2>
           Invista na{" "}
           <Image
@@ -481,7 +460,7 @@ export default function Plans() {
           sua saúde!
         </h2>
 
-        <div className="flex flex-col lg:flex-row gap-15 lg:gap-0 lg:justify-between items-center text-start 2xl:mt-25 mt-20 min-h-125 text-secondary">
+        <div className="flex flex-col lg:flex-row gap-15 lg:gap-0 lg:justify-between items-center text-start mt-20 min-h-125 text-secondary">
           <div className="md:w-105 pt-8 mx-5 md:mx-0 px-10 pb-11 bg-white rounded-2xl space-y-5">
             <h4 className="text-primary font-bold">PLANO FREE</h4>
             <p>
