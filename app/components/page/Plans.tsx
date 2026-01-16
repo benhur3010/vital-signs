@@ -346,20 +346,20 @@ export default function Plans() {
     >
       <div className="absolute inset-0 z-0">
         <Image
-          src="/plans/bg-plano-mobile.png"
+          src="/plans/bg-plano-tablet.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="md:hidden object-cover object-center"
+          className="lg:hidden object-cover object-center"
         />
         <Image
-          src="/plans/vitalsings.png"
+          src="/plans/bg-plano.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="hidden md:block object-cover"
+          className="hidden lg:block object-cover"
         />
       </div>
 
