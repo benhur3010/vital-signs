@@ -38,7 +38,7 @@ function segmentRectEntry(
   left: number,
   top: number,
   right: number,
-  bottom: number
+  bottom: number,
 ): { x: number; y: number } | null {
   const dx = x2 - x1;
   const dy = y2 - y1;
@@ -131,7 +131,7 @@ export default function Plans() {
         stopPaddingPx: 0,
       },
     ],
-    []
+    [],
   );
 
   useEffect(() => {
@@ -139,10 +139,10 @@ export default function Plans() {
     if (!stage) return;
 
     const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
     const canHover = window.matchMedia(
-      "(hover: hover) and (pointer: fine)"
+      "(hover: hover) and (pointer: fine)",
     ).matches;
 
     const isLg = () => window.innerWidth >= 1024;
@@ -196,7 +196,7 @@ export default function Plans() {
             left,
             top,
             right,
-            bottom
+            bottom,
           );
 
           if (entry) {
@@ -342,17 +342,18 @@ export default function Plans() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-380 overflow-hidden"
+      className="relative bg-white h-auto overflow-visible md:h-380 md:overflow-hidden pb-20 md:pb-0"
       id="planos-e-modelos-de-acesso"
     >
-      <div className="absolute inset-0 z-0">
+      {/* Background só a partir de md */}
+      <div className="absolute inset-0 z-0 hidden md:block">
         <Image
           src="/plans/bg-plano-tablet.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="lg:hidden object-cover object-center"
+          className="hidden md:block lg:hidden object-cover object-bottom"
         />
         <Image
           src="/plans/bg-plano.png"
@@ -364,7 +365,7 @@ export default function Plans() {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-black via-black/60 to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-black via-black/60 to-transparent z-10 hidden md:block" />
 
       <div className="absolute inset-0 z-20 hidden lg:block pointer-events-none">
         <div
@@ -439,7 +440,7 @@ export default function Plans() {
       </div>
 
       <div className="relative z-30 max-w-230 mx-auto pt-5 text-center">
-        <h2>
+        <h2 className="text-black md:text-white">
           {/* Linha 1 */}
           <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
             <span>Invista na</span>
@@ -471,8 +472,8 @@ export default function Plans() {
           </span>
         </h2>
 
-        <div className="flex flex-col lg:flex-row gap-15 lg:gap-0 lg:justify-between items-center text-start mt-20 min-h-125 text-secondary">
-          <div className="md:w-105 pt-8 mx-5 md:mx-0 px-10 pb-11 bg-white rounded-2xl space-y-5">
+        <div className="flex flex-col md:flex-row lg:px-0 px-5 gap-15 md:gap-5 lg:gap-0 lg:justify-between items-center text-start md:mt-20 mt-10 min-h-125 text-secondary">
+          <div className="w-full max-w-95 md:max-w-none md:w-105 pt-8 mx-auto md:mx-0 px-10 pb-11 md:bg-layout bg-span rounded-2xl space-y-5">
             <h4 className="text-primary font-bold">PLANO FREE</h4>
             <p>
               Acompanhe seus sinais vitais e histórico de saúde de forma
@@ -499,7 +500,7 @@ export default function Plans() {
             </button>
           </div>
 
-          <div className="md:w-115 pt-8 mx-5 md:mx-0 px-10 pb-4 bg-accent rounded-2xl space-y-5 relative">
+          <div className="w-full max-w-95 md:max-w-none md:w-115 pt-8 mx-auto md:mx-0 px-10 pb-4 bg-accent rounded-2xl space-y-5 relative">
             <h4 className="text-primary font-bold">PLANO ASSINATURA</h4>
             <p>
               Receba{" "}
@@ -534,7 +535,7 @@ export default function Plans() {
             <div className="absolute bg-span fitgree py-1 px-5 rounded-full -top-5 lg:right-0">
               RECOMENDADO
             </div>
-            <div className="absolute bg-blue-light text-primary fitgree py-1 px-5 rounded-full md:-bottom-7 right-8">
+            <div className="absolute bg-blue-light text-primary lg:text-left text-center fitgree py-1 px-5 rounded-full lg:-bottom-7 lg:right-8 md:right-5 right-1">
               Em breve integração com planos e operadoras
             </div>
           </div>

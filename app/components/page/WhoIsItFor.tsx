@@ -51,7 +51,7 @@ export default function WhoIsItFor() {
         iconAlt: "Indicadores",
       },
     ],
-    []
+    [],
   );
 
   const isDownRef = useRef(false);
@@ -123,12 +123,11 @@ export default function WhoIsItFor() {
   }, [cards.length]);
 
   return (
-    <section className=" bg-black pb-12" id="pra-quem-e">
+    <section className=" md:bg-black bg-layout pb-12" id="pra-quem-e">
       <div className="bg-span px-5 pt-15 pb-32 rounded-br-[180px]">
         <div className="container text-center">
-          <h2 className="text-primary font-light">
-            {/* Linha 1 */}
-            <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+          <h2 className="text-primary font-light leading-tight">
+            <span className="flex flex-wrap items-center justify-center gap-3 md:flex-nowrap">
               <span>Seu corpo</span>
 
               <ExpandablePill
@@ -143,10 +142,7 @@ export default function WhoIsItFor() {
               <span className="font-bold">fala.</span>
             </span>
 
-            <br />
-
-            {/* Linha 2 */}
-            <span className="inline-flex items-center justify-center gap-3 whitespace-nowrap">
+            <span className="mt-2 flex flex-wrap items-center justify-center gap-3 md:mt-3 md:flex-nowrap">
               <span>A</span>
 
               <ExpandablePill
@@ -196,7 +192,7 @@ export default function WhoIsItFor() {
               startXRef.current = e.clientX;
               startScrollLeftRef.current = el.scrollLeft;
               (e.currentTarget as HTMLDivElement).setPointerCapture(
-                e.pointerId
+                e.pointerId,
               );
             }}
             onPointerMove={(e) => {
@@ -212,7 +208,7 @@ export default function WhoIsItFor() {
               setIsDragging(false);
               try {
                 (e.currentTarget as HTMLDivElement).releasePointerCapture(
-                  e.pointerId
+                  e.pointerId,
                 );
               } catch {}
             }}

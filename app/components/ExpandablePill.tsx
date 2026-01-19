@@ -14,7 +14,6 @@ type ExpandablePillProps = {
   collapseMs?: number;
   minOpenMs?: number;
   extraHoldMs?: number;
-
   className?: string;
 };
 
@@ -32,6 +31,7 @@ export function ExpandablePill({
   className = "",
 }: ExpandablePillProps) {
   const [expanded, setExpanded] = useState(false);
+  const [canExpand, setCanExpand] = useState(false);
 
   const openedAtRef = useRef<number>(0);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -44,12 +44,15 @@ export function ExpandablePill({
   };
 
   const open = () => {
+    if (!canExpand) return;
     clearCloseTimer();
     openedAtRef.current = Date.now();
     setExpanded(true);
   };
 
   const scheduleClose = () => {
+    if (!canExpand) return;
+
     const elapsed = Date.now() - openedAtRef.current;
     const wait = Math.max(minOpenMs - elapsed, 0) + extraHoldMs;
 
@@ -60,7 +63,27 @@ export function ExpandablePill({
   };
 
   useEffect(() => {
-    return () => clearCloseTimer();
+    const mq = window.matchMedia(
+      "(min-width: 768px) and (hover: hover) and (pointer: fine)",
+    );
+
+    const apply = () => {
+      const ok = mq.matches;
+      setCanExpand(ok);
+
+      if (!ok) {
+        clearCloseTimer();
+        setExpanded(false);
+      }
+    };
+
+    apply();
+    mq.addEventListener?.("change", apply);
+
+    return () => {
+      mq.removeEventListener?.("change", apply);
+      clearCloseTimer();
+    };
   }, []);
 
   return (
@@ -73,21 +96,25 @@ export function ExpandablePill({
       onBlur={scheduleClose}
       className={[
         "relative inline-flex align-middle shrink-0 overflow-hidden rounded-full",
-        "cursor-pointer select-none",
+        "select-none",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70",
         "transition-[width] motion-reduce:transition-none",
         className,
       ].join(" ")}
       style={{
-        width: expanded ? expandedWidth : collapsedWidth,
+        width: canExpand
+          ? expanded
+            ? expandedWidth
+            : collapsedWidth
+          : collapsedWidth,
         height,
         transitionDuration: `${expanded ? expandMs : collapseMs}ms`,
         transitionTimingFunction: expanded
           ? "cubic-bezier(.2,.9,.2,1)"
           : "cubic-bezier(.4,0,.2,1)",
+        cursor: canExpand ? "pointer" : "default",
       }}
     >
-      {/* Imagem “normal” (fica visível quando recolhida) */}
       <Image
         src={collapsedSrc}
         alt={alt}
@@ -99,7 +126,6 @@ export function ExpandablePill({
         ].join(" ")}
       />
 
-      {/* Imagem “expandida” (aparece quando expande) */}
       <Image
         src={expandedSrc}
         alt={alt}
