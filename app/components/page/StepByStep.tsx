@@ -133,11 +133,12 @@ export default function StepByStep() {
           alt: "Ícones das lojas",
           width: 156,
           height: 133,
-          className: "absolute xl:top-0 md:top-5 bottom-0 md:bottom-auto right-0 md:right-auto xl:left-60 md:left-80",
+          className:
+            "absolute xl:top-0 md:top-5 bottom-0 md:bottom-auto right-0 md:right-auto xl:left-60 md:left-80",
         },
       },
     ],
-    []
+    [],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -268,7 +269,7 @@ export default function StepByStep() {
               </div>
             )}
 
-            {step.bottomBadge && (
+            {/* {step.bottomBadge && (
               <div
                 className={step.bottomBadge.className}
                 style={{
@@ -291,7 +292,7 @@ export default function StepByStep() {
                   />
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

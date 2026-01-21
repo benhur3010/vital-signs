@@ -508,8 +508,8 @@ export default function Plans() {
                 acompanhamento por profissionais de saúde,
               </span>{" "}
               alertas avançados e relatórios preditivos{" "}
-              <span className="font-bold">integrados ao seu médico</span>
-              ou plano de saúde.
+              <span className="font-bold">integrados ao seu médico</span> ou
+              plano de saúde.
             </p>
             <h4 className="text-primary font-extrabold">R$ 200/mês</h4>
             <ul className="space-y-2">

@@ -7,6 +7,7 @@ import { ExpandablePill } from "../ExpandablePill";
 type CardItem = {
   title: string;
   description: string;
+  overlayText: string;
   imageSrc: string;
   iconSrc: string;
   iconAlt: string;
@@ -18,6 +19,8 @@ export default function WhoIsItFor() {
       {
         title: "Monitoramento da Melhor Idade",
         description: "Acompanhe o bem-estar e a autonomia de quem você ama.",
+        overlayText:
+          "Acompanhe sinais vitais em tempo real e ofereça mais segurança, autonomia e tranquilidade no dia a dia.",
         imageSrc: "/who-is-it-for/monitoramento-melhor-idade.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
@@ -25,6 +28,8 @@ export default function WhoIsItFor() {
       {
         title: "Doenças Crônicas",
         description: "Viva melhor com suporte remoto e dados contínuos.",
+        overlayText:
+          "Monitore sua saúde de forma contínua e ajude seu médico a ajustar o cuidado com base em dados reais.",
         imageSrc: "/who-is-it-for/doencas-cronicas.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
@@ -32,6 +37,8 @@ export default function WhoIsItFor() {
       {
         title: "Medicina Preditiva e Preventiva",
         description: "Antecipe riscos e evite emergências com VitalScore™.",
+        overlayText:
+          "Antecipe riscos, acompanhe sua evolução de saúde e tome decisões antes que problemas possam aparecer.",
         imageSrc: "/who-is-it-for/medicina-preditiva.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
@@ -39,6 +46,8 @@ export default function WhoIsItFor() {
       {
         title: "Gestação",
         description: "Mais segurança para a mãe e bebê em cada fase.",
+        overlayText:
+          "Acompanhe sinais vitais com mais segurança durante a gestação, promovendo cuidado contínuo para a mãe e o bebê.",
         imageSrc: "/who-is-it-for/gestacao.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
@@ -46,6 +55,8 @@ export default function WhoIsItFor() {
       {
         title: "Vital Corporativo",
         description: "Saúde preventiva para equipes e redução de absenteísmo",
+        overlayText:
+          "Monitore a saúde das equipes, antecipe riscos e contribua para a redução do absenteísmo com cuidado preventivo.",
         imageSrc: "/who-is-it-for/vital-corporativo.png",
         iconSrc: "/who-is-it-for/monitoramento-icone.png",
         iconAlt: "Indicadores",
@@ -223,7 +234,7 @@ export default function WhoIsItFor() {
                 data-card
                 className="shrink-0 snap-start w-full sm:w-1/2 lg:w-80 flex lg:block justify-center"
               >
-                <div className="relative h-112 overflow-hidden rounded-2xl w-full max-w-[320px] mx-auto sm:max-w-none">
+                <div className="group relative h-112 overflow-hidden rounded-2xl w-full max-w-[320px] mx-auto sm:max-w-none">
                   {/* Imagem de fundo */}
                   <Image
                     src={item.imageSrc}
@@ -233,20 +244,21 @@ export default function WhoIsItFor() {
                     priority={false}
                   />
 
-                  {/* Conteúdo */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 text-white text-left pointer-events-none">
-                    {/* <div className="mb-4 w-32">
-                      <Image
-                        src={item.iconSrc}
-                        alt={item.iconAlt}
-                        width={128}
-                        height={76}
-                        className="w-full h-auto"
-                      />
-                    </div> */}
-
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white text-left pointer-events-none transition-opacity duration-300 md:group-hover:opacity-0">
                     <h6 className="max-w-42">{item.title}</h6>
                     <p className="mt-2 font-light">{item.description}</p>
+                  </div>
+
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                    <div className="absolute inset-0 bg-black/35 backdrop-blur-md" />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/15" />
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-b from-white/10 to-transparent" />
+
+                    <div className="relative z-10 flex h-full w-full items-center justify-center p-6 text-center text-white">
+                      <p className="text-20 font-light leading-snug">
+                        {item.overlayText}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </article>

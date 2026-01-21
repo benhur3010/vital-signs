@@ -362,13 +362,13 @@ export default function HowItWorks() {
             />
           </span>
 
-          <Image
+          {/* <Image
             src={active.detailImage.src}
             alt={active.detailImage.alt}
             width={active.detailImage.width}
             height={active.detailImage.height}
             className={active.detailImage.className}
-          />
+          /> */}
         </FadeIn>
       </div>
     </section>
